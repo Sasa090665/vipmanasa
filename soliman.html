@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>سليمان العمري (السلطان)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- أيقونات -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- CSS داخل نفس الملف -->
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      margin:0;
+      padding:0;
+      background:#2c3e50;
+      color:#fff;
+      animation: fadeIn 1s ease-in-out;
+    }
+    header {
+      text-align:center;
+      padding:20px;
+      background:#34495e;
+    }
+    header h1 {margin:0; font-size:28px; color:#3498db;}
+    header p {margin:5px 0; font-size:18px;}
+    .hero {
+      background:#2c3e50;
+      height:150px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:40px;
+      font-weight:bold;
+      font-family: 'Pacifico', cursive;
+      color:#e67e22;
+    }
+    section {padding:30px; text-align:center;}
+    section h2 {color:#3498db; margin-bottom:15px;}
+    img {
+      max-width:250px; border-radius:15px;
+      margin:20px auto; display:block;
+      box-shadow:0 6px 15px rgba(0,0,0,0.4);
+    }
+    .year-select {
+      padding:12px 20px; border-radius:10px; border:none;
+      font-size:16px; background:#34495e; color:#fff;
+      cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3);
+      transition:0.3s; margin-top:20px;
+    }
+    .year-select:hover {background:#3d566e; transform: scale(1.05);}
+    .video-container {margin-top:30px;}
+    .video-container iframe {
+      width:80%; height:400px; border:none;
+      border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,0.4);
+      margin-bottom:20px;
+    }
+    footer {
+      background:#34495e; text-align:center;
+      padding:15px; margin-top:30px;
+    }
+    footer p {margin:0; font-size:14px; color:#ccc;}
+    @keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
+  </style>
+</head>
+<body>
+  <!-- الهيدر -->
+  <header>
+    <h1>سليمان العمري (السلطان)</h1>
+    <p>مدرس اللغة الإنجليزية</p>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">English Master</div>
+
+  <!-- صورة ونبذة -->
+  <section id="teacher">
+    <img src="soliman.jpeg" alt="سليمان العمري">
+    <h2>نبذة عن المدرس</h2>
+    <p>
+      الأستاذ سليمان العمري المعروف بـ "السلطان"، متخصص في مادة اللغة الإنجليزية.  
+      يتميز بأسلوبه السهل الممتنع في الشرح، ويحرص دائمًا على تبسيط القواعد وتوضيح الأمثلة العملية للطلاب.  
+    </p>
+  </section>
+
+  <!-- اختيار السنة -->
+  <section id="year">
+    <h2>اختر السنة الدراسية لعرض الفيديوهات</h2>
+    <select class="year-select" id="yearSelect">
+      <option value="">-- اختر السنة --</option>
+      <option value="1 اعدادي">أولى إعدادي</option>
+      <option value="2 اعدادي">ثانية إعدادي</option>
+      <option value="1 ثانوي">أولى ثانوي</option>
+    </select>
+
+    <!-- مكان عرض الفيديوهات -->
+    <div class="video-container" id="videoContainer"></div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer>
+    <p>© 2026 سنتر VIP Royal التعليمي</p>
+  </footer>
+
+  <!-- سكريبت -->
+  <script>
+    const yearSelect = document.getElementById("yearSelect");
+    const videoContainer = document.getElementById("videoContainer");
+
+    yearSelect.addEventListener("change", () => {
+      videoContainer.innerHTML = ""; // تفريغ الفيديوهات القديمة
+      switch(yearSelect.value){
+        case "1 اعدادي":
+          videoContainer.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/A6Po9yizxM4" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/9kkjnFHreIk" allowfullscreen></iframe>
+          `;
+          break;
+        case "2 اعدادي":
+          videoContainer.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/A6Po9yizxM4" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/okS3o3PzD2M" allowfullscreen></iframe>
+          `;
+          break;
+        case "1 ثانوي":
+          videoContainer.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/tb-b4mrcsrY" allowfullscreen></iframe>
+          `;
+          break;
+      }
+    });
+  </script>
+</body>
+</html>

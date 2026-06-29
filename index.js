@@ -16,27 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       coursesTitle: "الكورسات المتاحة",
       contactTitle: "تواصل معنا",
       address: "📍 الجيزة، مصر",
-      footerText: "© 2026 سنتر VIP Royal التعليمي",
-      course1: "عربي",
-      course1Text: "قواعد اللغة والتعبير.",
-      course2: "إنجليزي",
-      course2Text: "مستويات مختلفة تناسب الجميع.",
-      course3: "علوم",
-      course3Text: "تجارب عملية وفهم عميق.",
-      course4: "تاريخ",
-      course4Text: "دراسة الأحداث التاريخية.",
-      course5: "جغرافيا",
-      course5Text: "دراسة الأرض والخرائط.",
-      course6: "فلسفة",
-      course6Text: "التفكير النقدي والمنطقي.",
-      course7: "رياضة",
-      course7Text: "أنشطة بدنية وصحية.",
-      course8: "علوم متكاملة",
-      course8Text: "دمج العلوم المختلفة.",
-      course9: "فيزياء",
-      course9Text: "قوانين الطبيعة والطاقة.",
-      course10: "برمجة",
-      course10Text: "تعلم أساسيات البرمجة."
+      footerText: "© 2026 سنتر VIP Royal التعليمي"
     },
     en: {
       title: "VIP Royal Educational Center",
@@ -51,27 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       coursesTitle: "Available Courses",
       contactTitle: "Contact Us",
       address: "📍 Giza, Egypt",
-      footerText: "© 2026 VIP Royal Educational Center",
-      course1: "Arabic",
-      course1Text: "Grammar and expression.",
-      course2: "English",
-      course2Text: "Different levels for everyone.",
-      course3: "Science",
-      course3Text: "Experiments and deep understanding.",
-      course4: "History",
-      course4Text: "Study of historical events.",
-      course5: "Geography",
-      course5Text: "Study of earth and maps.",
-      course6: "Philosophy",
-      course6Text: "Critical and logical thinking.",
-      course7: "Sports",
-      course7Text: "Physical and healthy activities.",
-      course8: "Integrated Sciences",
-      course8Text: "Combining different sciences.",
-      course9: "Physics",
-      course9Text: "Laws of nature and energy.",
-      course10: "Programming",
-      course10Text: "Learn programming basics."
+      footerText: "© 2026 VIP Royal Educational Center"
     }
   };
 
@@ -98,12 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('address').textContent = t.address;
     document.getElementById('footerText').textContent = t.footerText;
 
-    // تحديث الكورسات
-    for(let i=1; i<=10; i++){
-      document.getElementById(`course${i}`).textContent = t[`course${i}`];
-      document.getElementById(`course${i}Text`).textContent = t[`course${i}Text`];
-    }
-
     // تحديث زر اللغة والاتجاه
     langBtn.textContent = lang === 'ar' ? "EN" : "AR";
     currentLang = lang;
@@ -120,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // القائمة المنسدلة (٣ شرط) مع Slide Down/Up + تغيير الأيقونة
+  // القائمة المنسدلة (٣ شرط)
   const menuIcon = document.getElementById('menuIcon');
   const navLinks = document.getElementById('navLinks');
   const menuIconInner = menuIcon.querySelector('i');
@@ -154,4 +108,47 @@ document.addEventListener("DOMContentLoaded", () => {
   signupBtn.addEventListener('click', () => {
     window.location.href = "signup.html";
   });
+
+  // السلايدر
+  const slides = document.querySelector('.slides');
+  const slideCount = document.querySelectorAll('.slide').length;
+  let index = 0;
+
+  function showSlide(i){
+    index = (i + slideCount) % slideCount;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  document.querySelector('.prev').addEventListener('click', ()=> showSlide(index-1));
+  document.querySelector('.next').addEventListener('click', ()=> showSlide(index+1));
+
+  // تشغيل تلقائي للسلايدر
+  setInterval(()=> showSlide(index+1), 4000);
+
+  // ✅ التحقق من الفورم (Validation) مع رسائل تحذير
+  const signupForm = document.querySelector('#signupForm');
+  if(signupForm){
+    signupForm.addEventListener('submit', (e) => {
+      const name = signupForm.querySelector('#name').value.trim();
+      const email = signupForm.querySelector('#email').value.trim();
+      const password = signupForm.querySelector('#password').value.trim();
+
+      let errors = [];
+
+      if(name.length < 3){
+        errors.push("⚠️ الاسم لازم يكون 3 حروف على الأقل");
+      }
+      if(!email.includes("@")){
+        errors.push("⚠️ البريد الإلكتروني غير صالح");
+      }
+      if(password.length < 6){
+        errors.push("⚠️ كلمة المرور لازم تكون 6 أحرف على الأقل");
+      }
+
+      if(errors.length > 0){
+        e.preventDefault();
+        alert(errors.join("\n"));
+      }
+    });
+  }
 });

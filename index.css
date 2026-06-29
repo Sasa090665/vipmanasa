@@ -14,6 +14,8 @@ header {
   padding:20px;
   text-align:center;
 }
+header h1 {margin:0; font-size:28px;}
+header p {margin:5px 0; font-size:18px;}
 
 /* الناف بار */
 nav {
@@ -22,20 +24,16 @@ nav {
   text-align:center;
   position:relative;
 }
-
 .nav-links {
   display:flex;
   justify-content:center;
   gap:20px;
 }
-
 .nav-links a {
   color:#fff;
   text-decoration:none;
   font-weight:bold;
 }
-
-/* أيقونة الـ ٣ شرط */
 .menu-icon {
   display:none;
   font-size:26px;
@@ -63,14 +61,13 @@ section {
   text-align:center;
 }
 
+/* الكورسات */
 .courses {
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap:20px;
   padding:20px;
 }
-
-/* البطاقات */
 .course {
   background:#fff;
   padding:25px;
@@ -86,31 +83,10 @@ section {
   position:relative;
   overflow:hidden;
 }
-
-.course i {
-  font-size:40px;
-  color:#3498db;
-  margin-bottom:15px;
-}
-
-.course h3 {
-  margin:10px 0;
-  font-size:20px;
-  color:#2c3e50;
-}
-
-.course p {
-  font-size:14px;
-  color:#555;
-}
-
-.course:hover {
-  transform: translateY(-8px);
-  box-shadow:0 12px 30px rgba(0,0,0,0.2);
-}
-
-/* أنيميشن متتابع للبطاقات */
-/* أنيميشن متتابع للبطاقات */
+.course i {font-size:40px; color:#3498db; margin-bottom:15px;}
+.course h3 {margin:10px 0; font-size:20px; color:#2c3e50;}
+.course p {font-size:14px; color:#555;}
+.course:hover {transform: translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.2);}
 .course:nth-child(1){animation-delay:0.2s;}
 .course:nth-child(2){animation-delay:0.4s;}
 .course:nth-child(3){animation-delay:0.6s;}
@@ -122,26 +98,58 @@ section {
 .course:nth-child(9){animation-delay:1.8s;}
 .course:nth-child(10){animation-delay:2s;}
 
-/* تأثير عند الضغط */
-.course:active {
-  background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
-  box-shadow:0 0 20px rgba(52,152,219,0.5);
-  transform: scale(0.97);
+/* السلايدر */
+.slider {
+  position: relative;
+  max-width: 800px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
-.course:active::after {
-  content:"";
-  position:absolute;
-  top:0; left:0; right:0; bottom:0;
-  background:rgba(52,152,219,0.15);
-  animation: ripple 0.6s ease;
-  border-radius:20px;
+.slides {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
 }
-
-/* أنيميشن Ripple */
-@keyframes ripple {
-  from {opacity:1; transform: scale(0);}
-  to {opacity:0; transform: scale(2);}
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px;
+  object-fit: cover;
+}
+.caption {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+}
+/* الأسهم */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 20px;
+}
+.prev {left: 15px;}
+.next {right: 15px;}
+.prev:hover, .next:hover {background: rgba(0,0,0,0.8);}
 
 /* الفوتر */
 footer {
@@ -210,7 +218,6 @@ footer {
   justify-content:center;
   gap:20px;
 }
-
 .social-icons a {
   font-size:28px;
   color:#2c3e50;
@@ -218,17 +225,12 @@ footer {
   transform: translateY(20px);
   animation: fadeBounce 1s forwards;
 }
-
 .social-icons a:nth-child(1){animation-delay:0.2s;}
 .social-icons a:nth-child(2){animation-delay:0.4s;}
 .social-icons a:nth-child(3){animation-delay:0.6s;}
 .social-icons a:nth-child(4){animation-delay:0.8s;}
 .social-icons a:nth-child(5){animation-delay:1s;}
-
-.social-icons a:hover {
-  color:#3498db;
-  transform: scale(1.2);
-}
+.social-icons a:hover {color:#3498db; transform: scale(1.2);}
 
 /* للموبايل */
 @media (max-width: 768px) {
@@ -242,39 +244,66 @@ footer {
     width:100%;
     padding:15px 0;
   }
-  .nav-links.show {
-    display:flex;
-    animation: slideDown 0.5s ease forwards;
-  }
-  .nav-links.hide {
-    animation: slideUp 0.5s ease forwards;
-  }
-  .menu-icon {
-    display:block;
-  }
-  .hero {
-    font-size:36px;
-    height:150px;
-  }
-  header h1 {
-    font-size:22px;
-  }
-  header p {
-    font-size:16px;
-  }
-  .course {
-    max-width: 100%;
-  }
+  .nav-links.show {display:flex; animation: slideDown 0.5s ease forwards;}
+  .nav-links.hide {animation: slideUp 0.5s ease forwards;}
+  .menu-icon {display:block;}
+  .hero {font-size:36px; height:150px;}
+  header h1 {font-size:22px;}
+  header p {font-size:16px;}
+  .course {max-width: 100%;}
+  .caption {font-size:14px; padding:6px 12px;}
+}
+
+/* للتابلت */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .slider {max-width: 90%;}
+  .caption {font-size:16px;}
+}
+
+/* للكمبيوتر */
+@media (min-width: 1025px) {
+  .slider {max-width: 800px;}
+  .caption {font-size:18px;}
 }
 
 /* أنيميشن */
-@keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
-@keyframes zoomIn {from{transform: scale(0.8); opacity:0;} to{transform: scale(1); opacity:1;}}
-@keyframes fadeInUp {from{opacity:0; transform: translateY(30px);} to{opacity:1; transform: translateY(0);}}
-@keyframes slideDown {from{opacity:0; transform: translateY(-20px);} to{opacity:1; transform: translateY(0);}}
-@keyframes slideUp {from{opacity:1; transform: translateY(0);} to{opacity:0; transform: translateY(-20px);}}
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes zoomIn {
+  from {transform: scale(0.8); opacity:0;}
+  to {transform: scale(1); opacity:1;}
+}
+
+@keyframes fadeInUp {
+  from {opacity:0; transform: translateY(30px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+@keyframes slideDown {
+  from {opacity:0; transform: translateY(-20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+@keyframes slideUp {
+  from {opacity:1; transform: translateY(0);}
+  to {opacity:0; transform: translateY(-20px);}
+}
+
 @keyframes fadeBounce {
   0% {opacity:0; transform: translateY(20px);}
   60% {opacity:1; transform: translateY(-10px);}
   100% {opacity:1; transform: translateY(0);}
+}
+
+/* تنسيقات التحذيرات للفورم */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+  display: block;
+  text-align: right;
+  animation: fadeIn 0.5s ease-in-out;
 }
