@@ -7,73 +7,59 @@
   <!-- أيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- CSS داخل نفس الملف -->
   <style>
-    body {
-      font-family: Tahoma, sans-serif;
-      margin:0;
-      padding:0;
-      background:#2c3e50;
-      color:#fff;
-      animation: fadeIn 1s ease-in-out;
-    }
-    header {
-      text-align:center;
-      padding:20px;
-      background:#34495e;
-    }
+    body {font-family: Tahoma, sans-serif; margin:0; padding:0; background:#2c3e50; color:#fff;}
+    header {text-align:center; padding:20px; background:#34495e;}
     header h1 {margin:0; font-size:28px; color:#3498db;}
     header p {margin:5px 0; font-size:18px;}
-    .hero {
-      background:#2c3e50;
-      height:150px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:40px;
-      font-weight:bold;
-      font-family: 'Pacifico', cursive;
-      color:#e67e22;
-    }
+    .hero {background:#2c3e50; height:150px; display:flex; align-items:center; justify-content:center; font-size:40px; font-weight:bold; color:#e67e22;}
     section {padding:30px; text-align:center;}
     section h2 {color:#3498db; margin-bottom:15px;}
-    img {
-      max-width:250px; border-radius:15px;
-      margin:20px auto; display:block;
-      box-shadow:0 6px 15px rgba(0,0,0,0.4);
+    img {max-width:250px; border-radius:15px; margin:20px auto; display:block; box-shadow:0 6px 15px rgba(0,0,0,0.4);}
+    
+    /* البطاقات */
+    .cards {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:30px;}
+    .card {
+      background:#34495e; padding:20px; border-radius:15px;
+      box-shadow:0 6px 15px rgba(0,0,0,0.3);
+      transition:0.4s ease;
+      opacity:0; transform:translateY(30px);
+      animation: fadeUp 1s forwards;
     }
-    .year-select {
-      padding:12px 20px; border-radius:10px; border:none;
-      font-size:16px; background:#34495e; color:#fff;
-      cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.3);
-      transition:0.3s; margin-top:20px;
+    .card:nth-child(1){animation-delay:0.2s;}
+    .card:nth-child(2){animation-delay:0.4s;}
+    .card:nth-child(3){animation-delay:0.6s;}
+    .card:hover {
+      transform:translateY(-5px) scale(1.05);
+      background:#3d566e;
+      box-shadow:0 8px 20px rgba(0,0,0,0.5);
     }
-    .year-select:hover {background:#3d566e; transform: scale(1.05);}
+    .card i {font-size:40px; color:#e67e22; margin-bottom:15px; transition:0.3s;}
+    .card:hover i {color:#f1c40f; transform:rotate(10deg);}
+    .card h3 {margin:10px 0; color:#fff;}
+    .card p {color:#ddd; font-size:14px;}
+    
+    /* أنيميشن */
+    @keyframes fadeUp {
+      from {opacity:0; transform:translateY(30px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    .year-select {padding:12px 20px; border-radius:10px; border:none; font-size:16px; background:#34495e; color:#fff; cursor:pointer; margin-top:20px;}
     .video-container {margin-top:30px;}
-    .video-container iframe {
-      width:80%; height:400px; border:none;
-      border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,0.4);
-      margin-bottom:20px;
-    }
-    footer {
-      background:#34495e; text-align:center;
-      padding:15px; margin-top:30px;
-    }
+    .video-container iframe {width:80%; height:400px; border:none; border-radius:15px; margin-bottom:20px;}
+    footer {background:#34495e; text-align:center; padding:15px; margin-top:30px;}
     footer p {margin:0; font-size:14px; color:#ccc;}
-    @keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
   </style>
 </head>
 <body>
-  <!-- الهيدر -->
   <header>
     <h1>سليمان العمري (السلطان)</h1>
     <p>مدرس اللغة الإنجليزية</p>
   </header>
 
-  <!-- Hero Section -->
   <div class="hero">English Master</div>
 
-  <!-- صورة ونبذة -->
   <section id="teacher">
     <img src="soliman.jpeg" alt="سليمان العمري">
     <h2>نبذة عن المدرس</h2>
@@ -81,9 +67,27 @@
       الأستاذ سليمان العمري المعروف بـ "السلطان"، متخصص في مادة اللغة الإنجليزية.  
       يتميز بأسلوبه السهل الممتنع في الشرح، ويحرص دائمًا على تبسيط القواعد وتوضيح الأمثلة العملية للطلاب.  
     </p>
+
+    <!-- البطاقات مع أنيميشن -->
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-book-open"></i>
+        <h3>شرح قصصي وأدبي</h3>
+        <p>أسلوب ممتع في شرح النصوص الأدبية والقصصية لتسهيل الفهم.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-language"></i>
+        <h3>الجرامر بأبسط الطرق</h3>
+        <p>تبسيط قواعد اللغة الإنجليزية بطريقة سهلة وواضحة.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>حفظ كلمات</h3>
+        <p>طرق مبتكرة لحفظ الكلمات الجديدة بسرعة وفعالية.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- اختيار السنة -->
   <section id="year">
     <h2>اختر السنة الدراسية لعرض الفيديوهات</h2>
     <select class="year-select" id="yearSelect">
@@ -92,23 +96,19 @@
       <option value="2 اعدادي">ثانية إعدادي</option>
       <option value="1 ثانوي">أولى ثانوي</option>
     </select>
-
-    <!-- مكان عرض الفيديوهات -->
     <div class="video-container" id="videoContainer"></div>
   </section>
 
-  <!-- الفوتر -->
   <footer>
     <p>© 2026 سنتر VIP Royal التعليمي</p>
   </footer>
 
-  <!-- سكريبت -->
   <script>
     const yearSelect = document.getElementById("yearSelect");
     const videoContainer = document.getElementById("videoContainer");
 
     yearSelect.addEventListener("change", () => {
-      videoContainer.innerHTML = ""; // تفريغ الفيديوهات القديمة
+      videoContainer.innerHTML = "";
       switch(yearSelect.value){
         case "1 اعدادي":
           videoContainer.innerHTML = `
