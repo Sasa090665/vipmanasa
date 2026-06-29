@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إنشاء حساب - VIP Royal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <div class="signup-container">
+    <h2><i class="fas fa-user-plus"></i> إنشاء حساب جديد</h2>
+    <form id="signupForm">
+      <div class="input-group">
+        <input type="text" id="fullname" placeholder="الاسم الكامل" required>
+        <div class="error" id="nameError"></div>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+        <div class="error" id="emailError"></div>
+      </div>
+      <div class="input-group">
+        <input type="text" id="nationalId" placeholder="الرقم القومي" required>
+        <div class="error" id="idError"></div>
+      </div>
+      <div class="input-group">
+        <input type="tel" id="studentPhone" placeholder="رقم هاتف الطالب" required>
+        <div class="error" id="studentPhoneError"></div>
+      </div>
+      <div class="input-group">
+        <input type="tel" id="parentPhone" placeholder="رقم هاتف ولي الأمر" required>
+        <div class="error" id="parentPhoneError"></div>
+      </div>
+      <div class="input-group">
+        <select id="province" required>
+          <option value="" disabled selected>اختر المحافظة</option>
+          <option>القاهرة</option>
+          <option>الجيزة</option>
+          <option>الإسكندرية</option>
+          <option>بورسعيد</option>
+          <option>السويس</option>
+          <option>دمياط</option>
+          <option>الدقهلية</option>
+          <option>الشرقية</option>
+          <option>الغربية</option>
+          <option>المنوفية</option>
+          <option>القليوبية</option>
+          <option>كفر الشيخ</option>
+          <option>الفيوم</option>
+          <option>بني سويف</option>
+          <option>المنيا</option>
+          <option>أسيوط</option>
+          <option>سوهاج</option>
+          <option>قنا</option>
+          <option>الأقصر</option>
+          <option>أسوان</option>
+          <option>البحر الأحمر</option>
+          <option>الوادي الجديد</option>
+          <option>مطروح</option>
+          <option>شمال سيناء</option>
+          <option>جنوب سيناء</option>
+        </select>
+        <div class="error" id="provinceError"></div>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="كلمة المرور" required>
+        <div class="error" id="passwordError"></div>
+      </div>
+      <div class="input-group">
+        <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+        <div class="error" id="confirmPasswordError"></div>
+      </div>
+      <button type="submit">تسجيل</button>
+    </form>
+    <p>لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a></p>
+  </div>
+  <script src="signup.js"></script>
+</body>
+</html>
