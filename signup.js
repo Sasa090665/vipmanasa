@@ -1,5 +1,5 @@
 // signup.js
-document.getElementById("signupForm").addEventListener("submit", function (e) {
+document.getElementById("signupForm").addEventListener("submit", async function (e) {
   e.preventDefault(); // منع الإرسال الافتراضي
 
   let isValid = true;
@@ -99,7 +99,33 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
 
   // إذا كل شيء صحيح
   if (isValid) {
-    alert("تم التسجيل بنجاح ✅");
-    // هنا ممكن تضيف كود إرسال البيانات للسيرفر
+    // تهيئة Supabase
+    const { createClient } = supabase;
+    const supabaseClient = createClient(
+      "https://jdtsssxnbnygodvakeem.supabase.co",
+      "sb_publishable_Aio2byia1JGLAPGqSlqmYg_NaZI40I1"
+    );
+
+    // إدخال البيانات في جدول student
+    const { error } = await supabaseClient
+      .from("student")
+      .insert([
+        {
+          fullname: fullname.value.trim(),
+          email: email.value.trim(),
+          national_id: nationalId.value.trim(),
+          student_phone: studentPhone.value.trim(),
+          parent_phone: parentPhone.value.trim(),
+          province: province.value,
+          password: password.value.trim()
+        }
+      ]);
+
+    if (error) {
+      alert("حدث خطأ أثناء التسجيل ❌: " + error.message);
+    } else {
+      alert("تم التسجيل بنجاح ✅");
+      window.location.href = "login.html";
+    }
   }
 });
