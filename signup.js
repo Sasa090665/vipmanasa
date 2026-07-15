@@ -1,4 +1,3 @@
-// signup.js
 document.getElementById("signupForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -9,7 +8,9 @@ document.getElementById("signupForm").addEventListener("submit", async function 
   const nationalId = document.getElementById("nationalId").value.trim();
   const studentPhone = document.getElementById("studentPhone").value.trim();
   const parentPhone = document.getElementById("parentPhone").value.trim();
+  const governorate = document.getElementById("governorate").value;
   const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
   // عناصر الأخطاء
   const nameError = document.getElementById("nameError");
@@ -17,28 +18,68 @@ document.getElementById("signupForm").addEventListener("submit", async function 
   const nationalIdError = document.getElementById("nationalIdError");
   const studentPhoneError = document.getElementById("studentPhoneError");
   const parentPhoneError = document.getElementById("parentPhoneError");
+  const governorateError = document.getElementById("governorateError");
   const passwordError = document.getElementById("passwordError");
+  const confirmPasswordError = document.getElementById("confirmPasswordError");
 
   // إعادة تعيين الأخطاء
-  [nameError, emailError, nationalIdError, studentPhoneError, parentPhoneError, passwordError].forEach(err => {
+  [nameError, emailError, nationalIdError, studentPhoneError, parentPhoneError, governorateError, passwordError, confirmPasswordError].forEach(err => {
     if (err) {
       err.style.display = "none";
       err.textContent = "";
     }
   });
 
-  // ✅ التحقق من الاسم (٣ كلمات على الأقل)
-  const nameParts = fullname.split(/\s+/);
-  if (nameParts.length < 3) {
-    nameError.textContent = "الاسم يجب أن يتكون من ٣ كلمات على الأقل";
+  // ✅ تحقق من البيانات الأساسية
+  if (fullname.split(/\s+/).length < 3) {
+    nameError.textContent = "الاسم لازم يكون ٣ كلمات على الأقل";
     nameError.style.display = "block";
     valid = false;
   }
 
-  // تحقق من كلمة المرور
+  if (!/^\d{14}$/.test(nationalId)) {
+    nationalIdError.textContent = "الرقم القومي لازم يكون 14 رقم بالظبط";
+    nationalIdError.style.display = "block";
+    valid = false;
+  }
+
+  if (!/^(010|011|012|015)[0-9]{8}$/.test(studentPhone)) {
+    studentPhoneError.textContent = "رقم الطالب لازم يبدأ بـ 010 أو 011 أو 012 أو 015 ويكون 11 رقم";
+    studentPhoneError.style.display = "block";
+    valid = false;
+  }
+
+  if (!/^(010|011|012|015)[0-9]{8}$/.test(parentPhone)) {
+    parentPhoneError.textContent = "رقم ولي الأمر لازم يبدأ بـ 010 أو 011 أو 012 أو 015 ويكون 11 رقم";
+    parentPhoneError.style.display = "block";
+    valid = false;
+  } else if (studentPhone === parentPhone) {
+    parentPhoneError.textContent = "رقم ولي الأمر لازم يكون مختلف عن رقم الطالب";
+    parentPhoneError.style.display = "block";
+    valid = false;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    emailError.textContent = "البريد الإلكتروني غير صالح";
+    emailError.style.display = "block";
+    valid = false;
+  }
+
   if (password.length < 6) {
-    passwordError.textContent = "كلمة المرور يجب أن تكون 6 أحرف على الأقل";
+    passwordError.textContent = "كلمة المرور لازم تكون 6 أحرف على الأقل";
     passwordError.style.display = "block";
+    valid = false;
+  }
+
+  if (password !== confirmPassword) {
+    confirmPasswordError.textContent = "كلمة المرور غير متطابقة";
+    confirmPasswordError.style.display = "block";
+    valid = false;
+  }
+
+  if (!governorate) {
+    governorateError.textContent = "لازم تختار المحافظة";
+    governorateError.style.display = "block";
     valid = false;
   }
 
@@ -49,73 +90,36 @@ document.getElementById("signupForm").addEventListener("submit", async function 
     "sb_publishable_Aio2byia1JGLAPGqSlqmYg_NaZI40I1"
   );
 
-  // تحقق من البريد الإلكتروني
-  const { data: emailData } = await supabaseClient
-    .from("student")
-    .select("id")
-    .eq("email", email)
-    .limit(1);
-
-  if (emailData && emailData.length > 0) {
-    emailError.textContent = "هذا البريد الإلكتروني مستخدم بالفعل";
-    emailError.style.display = "block";
-    valid = false;
-  }
-
-  // تحقق من الرقم القومي
-  const { data: nationalData } = await supabaseClient
-    .from("student")
-    .select("id")
-    .eq("national_id", nationalId)
-    .limit(1);
-
-  if (nationalData && nationalData.length > 0) {
-    nationalIdError.textContent = "هذا الرقم القومي مستخدم بالفعل";
-    nationalIdError.style.display = "block";
-    valid = false;
-  }
-
-  // تحقق من رقم الطالب
-  const { data: studentPhoneData } = await supabaseClient
-    .from("student")
-    .select("id")
-    .eq("student_phone", studentPhone)
-    .limit(1);
-
-  if (studentPhoneData && studentPhoneData.length > 0) {
-    studentPhoneError.textContent = "رقم الطالب مستخدم بالفعل";
-    studentPhoneError.style.display = "block";
-    valid = false;
-  }
-
-  // تحقق من رقم ولي الأمر
-  const { data: parentPhoneData } = await supabaseClient
-    .from("student")
-    .select("id")
-    .eq("parent_phone", parentPhone)
-    .limit(1);
-
-  if (parentPhoneData && parentPhoneData.length > 0) {
-    parentPhoneError.textContent = "رقم ولي الأمر مستخدم بالفعل";
-    parentPhoneError.style.display = "block";
-    valid = false;
-  }
-
-  // لو كل حاجة صح
   if (valid) {
     const { error } = await supabaseClient.from("student").insert([
       {
-        fullname,
+        student_name: fullname,
         email,
         national_id: nationalId,
-        student_phone: studentPhone,
+        phone: studentPhone,
         parent_phone: parentPhone,
+        governorate,
         password
       }
     ]);
 
     if (error) {
-      alert("❌ حصل خطأ أثناء التسجيل");
+      // ✅ التعامل مع أخطاء UNIQUE
+      if (error.message.includes("unique_email")) {
+        emailError.textContent = "البريد الإلكتروني متسجل قبل كده";
+        emailError.style.display = "block";
+      } else if (error.message.includes("unique_national")) {
+        nationalIdError.textContent = "الرقم القومي متسجل قبل كده";
+        nationalIdError.style.display = "block";
+      } else if (error.message.includes("unique_phone")) {
+        studentPhoneError.textContent = "رقم الطالب متسجل قبل كده";
+        studentPhoneError.style.display = "block";
+      } else if (error.message.includes("unique_parent")) {
+        parentPhoneError.textContent = "رقم ولي الأمر متسجل قبل كده";
+        parentPhoneError.style.display = "block";
+      } else {
+        alert("❌ حصل خطأ أثناء التسجيل: " + error.message);
+      }
     } else {
       alert("✅ تم التسجيل بنجاح");
       window.location.href = "login.html";
