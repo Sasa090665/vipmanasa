@@ -151,6 +151,16 @@ section {
 .next {right: 15px;}
 .prev:hover, .next:hover {background: rgba(0,0,0,0.8);}
 
+/* صورة المدرس */
+.modares-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
 /* الفوتر */
 footer {
   background:#2c3e50;
@@ -252,21 +262,25 @@ footer {
   header p {font-size:16px;}
   .course {max-width: 100%;}
   .caption {font-size:14px; padding:6px 12px;}
+  .modares-image img {max-width: 100%;}
+  .slide img {max-width: 100%;}
 }
 
 /* للتابلت */
 @media (min-width: 769px) and (max-width: 1024px) {
   .slider {max-width: 90%;}
   .caption {font-size:16px;}
+  .modares-image img {max-width: 80%;}
+  .slide img {max-width: 90%;}
 }
 
 /* للكمبيوتر */
 @media (min-width: 1025px) {
   .slider {max-width: 800px;}
   .caption {font-size:18px;}
+  .modares-image img {max-width: 600px;}
+  .slide img {max-width: 800px;}
 }
-
-/* أنيميشن */
 @keyframes fadeIn {
   from {opacity:0;}
   to {opacity:1;}
@@ -296,8 +310,9 @@ footer {
   0% {opacity:0; transform: translateY(20px);}
   60% {opacity:1; transform: translateY(-10px);}
   100% {opacity:1; transform: translateY(0);}
+}
 
-  
+/* رسائل الخطأ */
 .error {
   color: red;
   font-size: 13px;
