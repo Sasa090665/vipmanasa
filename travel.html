@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Center - منصة الرحلات والترفيه</title>
+    <link rel="stylesheet" href="travel.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <span>✨ VIP CENTER</span>
+        </div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#trips">الرحلات</a>
+            <a href="#book">الحجز السريع</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <span class="badge" style="margin: 0 auto 1rem;">المنصة الرسمية للأنشطة والترفيه</span>
+            <h1>رحلاتك الترفيهية بأسلوب VIP 🚀</h1>
+            <p>انضم لأقوى المغامرات والأنشطة الترفيهية المصممة بأسلوب عصري يضمن لك أقصى درجات الرفاهية والأمان.</p>
+            <a href="#book" class="btn btn-hero">احجز رحلتك الآن</a>
+        </div>
+
+        <!-- Trips Section -->
+        <h2 class="section-title" id="trips">الرحلات المتاحة حالياً</h2>
+        <div class="grid">
+            
+            <!-- رحلة الإسكندرية -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">🌊</div>
+                    <span class="badge">رحلة بحرية</span>
+                    <h3>رحلة الإسكندرية VIP</h3>
+                    <p>يوم كامل على شواطئ الإسكندرية مع جولات سياحية، وجبات بحرية، وأنشطة ترفيهية.</p>
+                </div>
+                <button class="btn" id="alex-details">التفاصيل والحجز</button>
+            </div>
+
+            <!-- مسابقة كرة القدم -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">⚽</div>
+                    <span class="badge">رياضة وتحدي</span>
+                    <h3>مسابقة كرة القدم الكبرى</h3>
+                    <p>بطولة كرة قدم بين الفرق المشاركة مع جوائز قيمة وأجواء حماسية.</p>
+                </div>
+                <button class="btn">التفاصيل والحجز</button>
+            </div>
+
+        </div>
+
+        <!-- Booking Form Section -->
+        <h2 class="section-title" id="book">تأكيد حجز مقعدك</h2>
+        <div class="form-container">
+            <form id="booking-form">
+                <div class="form-grid">
+                    
+                    <div class="form-group">
+                        <label for="student_name">الاسم بالكامل:</label>
+                        <input type="text" id="student_name" placeholder="أدخل اسمك الثلاثي" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_num">رقم الهاتف (واتساب):</label>
+                        <input type="tel" id="phone_num" placeholder="01XXXXXXXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trip_select">اختر الرحلة:</label>
+                        <select id="trip_select" required>
+                            <option value="">-- اضغط للاختيار --</option>
+                            <option value="alex">رحلة الإسكندرية VIP</option>
+                            <option value="football">مسابقة كرة القدم الكبرى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seat_count">عدد الأفراد:</label>
+                        <input type="number" id="seat_count" min="1" value="1" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="notes_text">ملاحظات إضافية:</label>
+                        <textarea id="notes_text" rows="3" placeholder="أدخل أي طلبات خاصة..."></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-hero btn-block" style="margin-top: 1.5rem;">تأكيد وتثبيت الحجز 💎</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 سنتر VIP Royal التعليمي
+    </footer>
+
+    <!-- نافذة التفاصيل -->
+    <div id="alex-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>تفاصيل رحلة الإسكندرية VIP</h2>
+            <p>
+🔥 أخيرًا الامتحانات خلصت... وجاء وقت المكافأة من سنتر VIP Royal! 😍☀️<br><br>
+لو زهقت من القعدة في البيت، ومحتاج يوم يفصلك عن ضغط الدراسة والامتحانات..هات اهلك واصحابك ويلا بينا 😉 إسكندرية مستنياك! 🌊💙<br><br>
+🏰 هنبداء بزياره قلعة قايتباي...<br>
+🏛️ ثم المتحف اليوناني الروماني...<br>
+🚤 جولة يخت وسط البحر (اختياري)<br>
+🌊 نزول الشاطئ وأجواء الصيف ☀️🏖️<br>
+🍦 جولة حرة لأشهر أماكن الأكل والحلويات والتصوير في إسكندرية.<br><br>
+💰 السعر: 400 جنيه فقط<br>
+📅 التحرك من سنتر VIP Royal ال800 فدان<br>
+            </p>
+        </div>
+    </div>
+
+    <script src="travel.js"></script>
+</body>
+</html>
