@@ -50,7 +50,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       .ilike("email", email)
       .maybeSingle();
 
-    // التعامل مع أخطاء الاتصال أو صلاحيات RLS
     if (error) {
       console.error("تفاصيل الخطأ من Supabase:", error.message);
       emailError.textContent = "حدث خطأ في الاتصال بالسيرفر، يرجى المحاولة لاحقاً";
@@ -58,29 +57,28 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       return;
     }
 
-    // لو البريد الإلكتروني مش موجود فعلياً
     if (!data) {
       emailError.textContent = "البريد الإلكتروني غير مسجل";
       emailError.style.display = "block";
       return;
     }
 
-    // مطابقة كلمة المرور
     if (data.password !== password) {
       passwordError.textContent = "كلمة المرور غير صحيحة";
       passwordError.style.display = "block";
       return;
     }
 
-    // تسجيل الدخول بنجاح -> حفظ البيانات في الـ Session
-    sessionStorage.setItem("student", JSON.stringify({
+    // ✅ التعديل هنا: التخزين في localStorage وإضافة مفتاح isLoggedIn
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("student", JSON.stringify({
       id: data.id,
       name: data.student_name,
       email: data.email,
       governorate: data.governorate
     }));
 
-    // التوجيه لصفحة لوحة التحكم
+    // التوجيه لصفحة الـ index
     window.location.href = "index.html";
 
   } catch (err) {

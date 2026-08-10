@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بيانات المستخدم - VIP Royal</title>
+  
+  <!-- الخطوط والأيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- مكتبة Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Cairo', Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f4f7f6;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      width: 90%;
+      flex: 1;
+    }
+
+    .profile-card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .avatar-icon {
+      font-size: 70px;
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+
+    .profile-card h2 {
+      color: #2c3e50;
+      margin-bottom: 25px;
+      font-size: 22px;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+    }
+
+    .info-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-right: 4px solid #3498db;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-label i {
+      color: #3498db;
+      width: 20px;
+    }
+
+    .info-value {
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-home { background: #3498db; color: #fff; }
+    .btn-logout { background: #e74c3c; color: #fff; }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>سنتر VIP Royal التعليمي</h1>
+    <p>ملف الطالب الشخصي</p>
+  </header>
+
+  <div class="container">
+    <div class="profile-card">
+      <div class="avatar-icon">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <h2>بيانات الطالب</h2>
+
+      <!-- عرض البيانات الحالية -->
+      <div class="info-group">
+        <span class="info-label"><i class="fas fa-user"></i> الاسم:</span>
+        <span class="info-value" id="studentName">جاري التحميل...</span>
+      </div>
+
+      <div class="info-group">
+        <span class="info-label"><i class="fas fa-envelope"></i> البريد الإلكتروني:</span>
+        <span class="info-value" id="studentEmail">جاري التحميل...</span>
+      </div>
+
+      <div class="info-group">
+        <span class="info-label"><i class="fas fa-map-marker-alt"></i> المحافظة:</span>
+        <span class="info-value" id="studentGov">جاري التحميل...</span>
+      </div>
+
+      <!-- الأزرار الرئيسية -->
+      <div class="actions">
+        <a href="index.html" class="btn btn-home"><i class="fas fa-house"></i> الرئيسية</a>
+        <button id="logoutBtn" class="btn btn-logout"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 سنتر VIP Royal التعليمي</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. التحقق من حالة تسجيل الدخول
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      const studentDataRaw = localStorage.getItem("student");
+
+      if (!isLoggedIn || !studentDataRaw) {
+        alert("عفواً، يجب تسجيل الدخول أولاً للوصول لهذه الصفحة.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const student = JSON.parse(studentDataRaw);
+
+      // 2. تعبئة البيانات في الصفحة
+      document.getElementById("studentName").textContent = student.name || "غير محدد";
+      document.getElementById("studentEmail").textContent = student.email || "غير محدد";
+      document.getElementById("studentGov").textContent = student.governorate || "غير محدد";
+
+      // 3. زر تسجيل الخروج
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        if (confirm("هل أنت تأكد من رغبتك في تسجيل الخروج؟")) {
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("student");
+          window.location.href = "index.html";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
