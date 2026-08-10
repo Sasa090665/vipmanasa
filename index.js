@@ -207,4 +207,52 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // === 🔒 منع فتح صفحات المدرسين لغير المسجلين ===
+  const teacherLinks = document.querySelectorAll('.slide a');
+
+  function showAuthModal() {
+    if (document.getElementById('authModal')) return; // منع تكرار النافذة
+
+    const modalOverlay = document.createElement('div');
+    modalOverlay.id = 'authModal';
+    modalOverlay.className = 'custom-modal-overlay';
+    modalOverlay.innerHTML = `
+      <div class="custom-modal-content">
+        <span class="close-modal">&times;</span>
+        <i class="fas fa-user-lock modal-icon"></i>
+        <h3>شكلك مش عامل حساب</h3>
+        <p>يرجى تسجيل الدخول أو إنشاء حساب جديد للوصول لصفحة المدرس.</p>
+        <div class="modal-buttons">
+          <button class="modal-login-btn" onclick="window.location.href='login.html'">
+            <i class="fas fa-sign-in-alt"></i> تسجيل دخول
+          </button>
+          <button class="modal-signup-btn" onclick="window.location.href='signup.html'">
+            <i class="fas fa-user-plus"></i> إنشاء حساب
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modalOverlay);
+
+    // إغلاق النافذة عند الضغط على زر الإغلاق أو خلفية النافذة
+    const closeBtn = modalOverlay.querySelector('.close-modal');
+    closeBtn.addEventListener('click', () => modalOverlay.remove());
+    
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) modalOverlay.remove();
+    });
+  }
+
+  // فحص الضغط على أي صورة/رابط مدرس
+  teacherLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (!isLoggedIn) {
+        e.preventDefault(); // منع الانتقال لصفحة المدرس
+        showAuthModal();   // إظهار الرسالة بالأزرار
+      }
+    });
+  });
+
 });
