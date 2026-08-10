@@ -37,8 +37,29 @@
     @keyframes fadeUp {from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);}}
 
     .year-select {padding:12px 20px; border-radius:10px; border:none; font-size:16px; background:#34495e; color:#fff; cursor:pointer; margin-top:20px;}
-    .video-container {margin-top:30px;}
-    .video-container iframe, .video-container video {width:50%; height:250px; border:none; border-radius:15px; margin-bottom:20px;}
+
+    /* الفيديوهات Responsive بنسبة 16:9 */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    .video-container::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%; /* نسبة 16:9 */
+    }
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 15px;
+    }
 
     .qr-container {max-width: 500px; margin: 20px auto; background: #34495e; padding: 20px; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.3);}
     #reader {width: 100%; border-radius: 10px; overflow: hidden; border: none !important;}
@@ -56,18 +77,12 @@
   <div class="hero">Math</div>
 
   <section id="teacher">
-    <img src="kad.jpeg" alt="محمد عبدالله">
+    <img src="kad.jpg" alt="محمد عبدالله">
     <h2>نبذة عن المدرس</h2>
     <p>
       الأستاذ محمد عبدالله المعروف بـ "القائد"، متخصص في مادة الرياضيات.  
       يتميز بأسلوبه المبسط في شرح القوانين والمعادلات، ويحرص دائمًا على تنمية مهارات التفكير المنطقي وحل المشكلات لدى الطلاب.  
     </p>
-
-    <!-- الفيديو المحلي بحجم أصغر -->
-    <video controls>
-      <source src="vidkad.mp4" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
-    </video>
 
     <div class="cards">
       <div class="card">
@@ -103,7 +118,7 @@
       <option value="2 اعدادي">ثانية إعدادي</option>
       <option value="1 ثانوي">أولى ثانوي</option>
     </select>
-    <div class="video-container" id="videoContainer"></div>
+    <div id="videoContainer"></div>
   </section>
 
   <footer>
@@ -119,20 +134,26 @@
       switch(yearSelect.value){
         case "1 اعدادي":
           videoContainer.innerHTML = `
-            <video controls>
-              <source src="vidkad.mp4" type="video/mp4">
-              متصفحك لا يدعم تشغيل الفيديو.
-            </video>
+            <div class="video-container">
+              <video controls>
+                <source src="vidkad.mp4" type="video/mp4">
+                متصفحك لا يدعم تشغيل الفيديو.
+              </video>
+            </div>
           `;
           break;
         case "2 اعدادي":
           videoContainer.innerHTML = `
-            <iframe src="https://www.youtube.com/embed/example3" allowfullscreen></iframe>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/example3" allowfullscreen></iframe>
+            </div>
           `;
           break;
         case "1 ثانوي":
           videoContainer.innerHTML = `
-            <iframe src="https://www.youtube.com/embed/example5" allowfullscreen></iframe>
+            <div class="video-container">
+              <iframe src="https://www.youtube.com/embed/example5" allowfullscreen></iframe>
+            </div>
           `;
           break;
       }
@@ -157,4 +178,3 @@
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   </script>
 </body>
-</html>
