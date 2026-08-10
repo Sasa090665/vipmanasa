@@ -1,4 +1,3 @@
-/* إعدادات عامة */
 body {
   font-family: Tahoma, sans-serif;
   margin:0;
@@ -7,7 +6,6 @@ body {
   animation: fadeIn 1.2s ease-in-out;
 }
 
-/* الهيدر */
 header {
   background:#2c3e50;
   color:#fff;
@@ -17,7 +15,6 @@ header {
 header h1 {margin:0; font-size:28px;}
 header p {margin:5px 0; font-size:18px;}
 
-/* الناف بار */
 nav {
   background:#34495e;
   padding:10px;
@@ -41,27 +38,30 @@ nav {
   cursor:pointer;
 }
 
-/* Hero Section */
+/* التعديل الخاص بـ Hero والشعار */
 .hero {
   background:#2c3e50;
-  height:200px;
+  height:220px;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#3498db;
-  font-size:60px;
-  font-weight:bold;
-  font-family: 'Pacifico', cursive;
+  padding:10px;
   animation: zoomIn 1.2s ease;
+  overflow:hidden;
 }
 
-/* الأقسام */
+.hero-logo {
+  max-height:180px;
+  max-width:90%;
+  object-fit:contain;
+  border-radius:10px;
+}
+
 section {
   padding:40px;
   text-align:center;
 }
 
-/* الكورسات */
 .courses {
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -98,7 +98,6 @@ section {
 .course:nth-child(9){animation-delay:1.8s;}
 .course:nth-child(10){animation-delay:2s;}
 
-/* السلايدر */
 .slider {
   position: relative;
   max-width: 800px;
@@ -134,7 +133,7 @@ section {
   border-radius: 30px;
   font-weight: bold;
 }
-/* الأسهم */
+
 .prev, .next {
   position: absolute;
   top: 50%;
@@ -151,7 +150,6 @@ section {
 .next {right: 15px;}
 .prev:hover, .next:hover {background: rgba(0,0,0,0.8);}
 
-/* صورة المدرس */
 .modares-image img {
   width: 100%;
   height: auto;
@@ -161,7 +159,6 @@ section {
   object-fit: cover;
 }
 
-/* الفوتر */
 footer {
   background:#2c3e50;
   color:#fff;
@@ -169,7 +166,6 @@ footer {
   padding:20px;
 }
 
-/* أزرار الدخول والتسجيل */
 .auth-buttons {
   display:flex;
   gap:12px;
@@ -190,12 +186,11 @@ footer {
 .login-btn {background:#3498db; color:#fff;}
 .signup-btn {background:#e67e22; color:#fff;}
 
-/* زر اللغة */
 .lang-btn {
   margin-top:10px;
   padding:8px 15px;
   border:none;
-  border-radius:20px;
+  border-radius:40px;
   background:#16a085;
   color:#fff;
   cursor:pointer;
@@ -203,7 +198,6 @@ footer {
 }
 .lang-btn:hover {background:#138d75;}
 
-/* أيقونة واتساب */
 .whatsapp-icon {
   position:fixed;
   bottom:20px;
@@ -221,7 +215,6 @@ footer {
 .whatsapp-icon.show {opacity:1; pointer-events:auto;}
 .whatsapp-icon:hover {transform: scale(1.1); background:#1ebe5d;}
 
-/* أيقونات السوشيال */
 .social-icons {
   margin-top:20px;
   display:flex;
@@ -242,7 +235,6 @@ footer {
 .social-icons a:nth-child(5){animation-delay:1s;}
 .social-icons a:hover {color:#3498db; transform: scale(1.2);}
 
-/* للموبايل */
 @media (max-width: 768px) {
   .nav-links {
     display:none;
@@ -257,7 +249,8 @@ footer {
   .nav-links.show {display:flex; animation: slideDown 0.5s ease forwards;}
   .nav-links.hide {animation: slideUp 0.5s ease forwards;}
   .menu-icon {display:block;}
-  .hero {font-size:36px; height:150px;}
+  .hero {height:150px;}
+  .hero-logo {max-height:120px;}
   header h1 {font-size:22px;}
   header p {font-size:16px;}
   .course {max-width: 100%;}
@@ -266,7 +259,6 @@ footer {
   .slide img {max-width: 100%;}
 }
 
-/* للتابلت */
 @media (min-width: 769px) and (max-width: 1024px) {
   .slider {max-width: 90%;}
   .caption {font-size:16px;}
@@ -274,13 +266,13 @@ footer {
   .slide img {max-width: 90%;}
 }
 
-/* للكمبيوتر */
 @media (min-width: 1025px) {
   .slider {max-width: 800px;}
   .caption {font-size:18px;}
   .modares-image img {max-width: 600px;}
   .slide img {max-width: 800px;}
 }
+
 @keyframes fadeIn {
   from {opacity:0;}
   to {opacity:1;}
@@ -312,7 +304,6 @@ footer {
   100% {opacity:1; transform: translateY(0);}
 }
 
-/* رسائل الخطأ */
 .error {
   color: red;
   font-size: 13px;
