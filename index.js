@@ -14,9 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutTitle: "من نحن",
       aboutText: "سنتر VIP Royal يقدم أفضل الكورسات التعليمية في مختلف المجالات مع نخبة من المدرسين.",
       coursesTitle: "الكورسات المتاحة",
-      contactTitle: "تواصل معنا",
-      address: "📍 الجيزة، مصر",
-      footerText: "© 2026 سنتر VIP Royal التعليمي"
+      address: "📍 زهراء اكتوبر - حي الفيروز - رويال مول - الدور 3",
+      footerText: "© 2026 جميع الحقوق محفوظة لـ سنتر VIP Royal التعليمي"
     },
     en: {
       title: "VIP Royal Educational Center",
@@ -30,9 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutTitle: "About Us",
       aboutText: "VIP Royal offers the best courses in various fields with top teachers.",
       coursesTitle: "Available Courses",
-      contactTitle: "Contact Us",
-      address: "📍 Giza, Egypt",
-      footerText: "© 2026 VIP Royal Educational Center"
+      address: "📍 Zahraa October - Al Fayrouz - Royal Mall - Floor 3",
+      footerText: "© 2026 All Rights Reserved - VIP Royal Center"
     }
   };
 
@@ -49,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (document.getElementById('title')) document.getElementById('title').textContent = t.title;
       if (document.getElementById('subtitle')) document.getElementById('subtitle').textContent = t.subtitle;
       
-      // التحقق من وجود الأزرار قبل ترجمتها
       const loginBtnEl = document.getElementById('loginBtn');
       if (loginBtnEl) loginBtnEl.innerHTML = t.loginBtn;
       
@@ -62,34 +59,29 @@ document.addEventListener("DOMContentLoaded", () => {
       if (document.getElementById('aboutTitle')) document.getElementById('aboutTitle').textContent = t.aboutTitle;
       if (document.getElementById('aboutText')) document.getElementById('aboutText').textContent = t.aboutText;
       if (document.getElementById('coursesTitle')) document.getElementById('coursesTitle').textContent = t.coursesTitle;
-      if (document.getElementById('contactTitle')) document.getElementById('contactTitle').textContent = t.contactTitle;
-      if (document.getElementById('address')) document.getElementById('address').textContent = t.address;
+      if (document.getElementById('address')) document.getElementById('address').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${t.address}`;
       if (document.getElementById('footerText')) document.getElementById('footerText').textContent = t.footerText;
 
-      // ترجمة زرار بيانات المستخدم لو موجود
       const navProfile = document.getElementById('navProfile');
       if (navProfile) {
         navProfile.textContent = t.navProfile;
       }
 
-      // تحديث زر اللغة والاتجاه
       langBtn.textContent = lang === 'ar' ? "EN" : "AR";
       currentLang = lang;
       document.body.setAttribute("dir", lang === 'ar' ? "rtl" : "ltr");
     });
   }
 
-  // === ✅ جزء التحقق من تسجيل الدخول وفحص الـ localStorage ===
+  // === ✅ التحقق من تسجيل الدخول وفحص الـ localStorage ===
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" || localStorage.getItem("student") !== null;
 
   if (isLoggedIn) {
-    // 1: إخفاء أزرار تسجيل الدخول وإنشاء الحساب
     const authButtons = document.querySelector('.auth-buttons');
     if (authButtons) {
       authButtons.style.display = 'none';
     }
 
-    // 2: إضافة زرار "بيانات المستخدم" في الناف بار
     const navLinks = document.getElementById('navLinks');
     if (navLinks && !document.getElementById('navProfile')) {
       const profileLink = document.createElement('a');
@@ -105,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const whatsappIcon = document.querySelector('.whatsapp-icon');
   if (whatsappIcon) {
     window.addEventListener('scroll', () => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 150) {
         whatsappIcon.classList.add('show');
       } else {
         whatsappIcon.classList.remove('show');
@@ -113,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // القائمة المنسدلة (٣ شرط)
+  // القائمة المنسدلة للشبابيك الصغيرة (الموبايل)
   const menuIcon = document.getElementById('menuIcon');
   const navLinksElement = document.getElementById('navLinks');
   
@@ -128,11 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
           menuIconInner.classList.add('fa-bars');
         }
         setTimeout(() => {
-          navLinksElement.style.display = "none";
           navLinksElement.classList.remove('hide');
-        }, 500);
+        }, 400);
       } else {
-        navLinksElement.style.display = "flex";
         navLinksElement.classList.add('show');
         if (menuIconInner) {
           menuIconInner.classList.remove('fa-bars');
@@ -142,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // زرار تسجيل الدخول ينقل لصفحة login.html
+  // التوجيه لصفحات التسجيل
   const loginBtn = document.getElementById('loginBtn');
   if (loginBtn) {
     loginBtn.addEventListener('click', () => {
@@ -150,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // زرار إنشاء حساب ينقل لصفحة signup.html
   const signupBtn = document.getElementById('signupBtn');
   if (signupBtn) {
     signupBtn.addEventListener('click', () => {
@@ -158,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // السلايدر
+  // === 🖼️ السلايدر التفاعلي (معدل مع دعم الـ RTL) ===
   const slides = document.querySelector('.slides');
   const slideItems = document.querySelectorAll('.slide');
   
@@ -168,7 +157,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showSlide(i) {
       index = (i + slideCount) % slideCount;
-      slides.style.transform = `translateX(-${index * 100}%)`;
+      const direction = document.body.getAttribute('dir') === 'ltr' ? '-' : '';
+      slides.style.transform = `translateX(${direction}${index * 100}%)`;
     }
 
     const prevBtn = document.querySelector('.prev');
@@ -177,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (prevBtn) prevBtn.addEventListener('click', () => showSlide(index - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => showSlide(index + 1));
 
-    // تشغيل تلقائي للسلايدر
     setInterval(() => showSlide(index + 1), 4000);
   }
 
@@ -212,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const teacherLinks = document.querySelectorAll('.slide a');
 
   function showAuthModal() {
-    if (document.getElementById('authModal')) return; // منع تكرار النافذة
+    if (document.getElementById('authModal')) return;
 
     const modalOverlay = document.createElement('div');
     modalOverlay.id = 'authModal';
@@ -236,7 +225,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.appendChild(modalOverlay);
 
-    // إغلاق النافذة عند الضغط على زر الإغلاق أو خلفية النافذة
     const closeBtn = modalOverlay.querySelector('.close-modal');
     closeBtn.addEventListener('click', () => modalOverlay.remove());
     
@@ -245,12 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // فحص الضغط على أي صورة/رابط مدرس
   teacherLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       if (!isLoggedIn) {
-        e.preventDefault(); // منع الانتقال لصفحة المدرس
-        showAuthModal();   // إظهار الرسالة بالأزرار
+        e.preventDefault();
+        showAuthModal();
       }
     });
   });

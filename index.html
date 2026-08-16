@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <title>VIP Royal</title>
@@ -10,31 +10,36 @@
 </head>
 <body>
 
-  <header>
-    <h1 id="title">سنتر VIP Royal التعليمي</h1>
-    <p id="subtitle">مستقبلك يبدأ من هنا</p>
-    <div class="auth-buttons">
-      <button class="login-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> تسجيل دخول</button>
-      <button class="signup-btn" id="signupBtn"><i class="fas fa-user-plus"></i> إنشاء حساب</button>
-    </div>
-    <button class="lang-btn" id="langBtn">EN</button>
-  </header>
+  <!-- الحاوية الكبيرة التي تجمع الهيدر واللوجو الخلفي ليمتد بطول الشاشة -->
+  <div class="hero-wrapper">
+    <div class="hero-overlay"></div>
 
-  <nav>
-    <div class="menu-icon" id="menuIcon">
-      <i class="fas fa-bars"></i>
-    </div>
-    <div class="nav-links" id="navLinks">
-      <a href="#about" id="navAbout">من نحن</a>
-      <a href="#courses" id="navCourses">الكورسات</a>
-      <a href="#contact" id="navContact">تواصل معنا</a>
-      <a href="travel.html">الرحلات و الترفيه</a>
-    </div>
-  </nav>
+    <header>
+      <div class="header-titles">
+        <h1 id="title">سنتر VIP Royal التعليمي</h1>
+        <p id="subtitle">مستقبلك يبدأ من هنا</p>
+      </div>
+      
+      <div class="header-actions">
+        <div class="auth-buttons">
+          <button class="login-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> تسجيل دخول</button>
+          <button class="signup-btn" id="signupBtn"><i class="fas fa-user-plus"></i> إنشاء حساب</button>
+        </div>
+        <button class="lang-btn" id="langBtn">EN</button>
+      </div>
+    </header>
 
-  <!-- الجزء المعدل: وضع صورة الشعار بدل النص -->
-  <div class="hero" id="heroText">
-    <img src="logo2.jpg" alt="VIP Royal Logo" class="hero-logo">
+    <nav>
+      <div class="menu-icon" id="menuIcon">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" id="navAbout">من نحن</a>
+        <a href="#courses" id="navCourses">الكورسات</a>
+        <a href="#contact" id="navContact">تواصل معنا</a>
+        <a href="travel.html">الرحلات و الترفيه</a>
+      </div>
+    </nav>
   </div>
 
   <section id="about">
@@ -84,7 +89,6 @@
           </a>
         </div>
 
-        <!-- الصور الجديدة -->
         <div class="slide">
           <a href="mansour.html">
             <img src="mansour.jpg" alt="منصور">
@@ -128,23 +132,42 @@
     </div>
   </section>
 
-  <section id="contact">
-    <h2 id="contactTitle">تواصل معنا</h2>
-    <p id="phone">📞 <a href="tel:01094978153"></a></p>
-    <p id="email">📧 vip63113@email.com</p>
-    <p id="address">📍 زهراء اكتوبر - حي الفيروز - رويال مول - الدور 3</p>
+  <!-- الفوتر المدمج به التواصل والروابط -->
+  <footer id="contact">
+    <div class="footer-container">
+      
+      <!-- العمود الأول: اسم السنتر والوصف -->
+      <div class="footer-box">
+        <h3>VIP Royal</h3>
+        <p>منصة وسنتر VIP Royal التعليمي - طريقك للقمة مع أفضل نخبة من المدرسين.</p>
+      </div>
 
-    <div class="social-icons">
-      <a href="https://www.facebook.com/share/1EAmHiQcUm/" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://youtube.com/@solimanss912?si=8TE2OglsC687GeW0" target="_blank"><i class="fab fa-youtube"></i></a>
-      <a href="https://t.me/+aq4ATXO1Wl03OWE0" target="_blank"><i class="fab fa-telegram"></i></a>
-      <a href="https://www.tiktok.com/@v.i.p.royal?_r=1&_t=zs-97P7xLUoCt" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://www.instagram.com/vip_royal72?igsh=dzlmbHh5MXFqb2Q5" target="_blank"><i class="fab fa-instagram"></i></a>
+      <!-- العمود الثاني: تفاصيل التواصل -->
+      <div class="footer-box">
+        <h4>تواصل معنا</h4>
+        <p id="phone"><i class="fas fa-phone-alt"></i> <a href="tel:01094978153">01094978153</a></p>
+        <p id="email"><i class="fas fa-envelope"></i> vip63113@email.com</p>
+        <p id="address"><i class="fas fa-map-marker-alt"></i> زهراء اكتوبر - حي الفيروز - رويال مول - الدور 3</p>
+      </div>
+
+      <!-- العمود الثالث: شبكات التواصل الاجتماعي -->
+      <div class="footer-box">
+        <h4>تابعنا على</h4>
+        <div class="footer-social-icons">
+          <a href="https://www.facebook.com/share/1EAmHiQcUm/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://youtube.com/@solimanss912?si=8TE2OglsC687GeW0" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://t.me/+aq4ATXO1Wl03OWE0" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.tiktok.com/@v.i.p.royal?_r=1&_t=zs-97P7xLUoCt" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="https://www.instagram.com/vip_royal72?igsh=dzlmbHh5MXFqb2Q5" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
     </div>
-  </section>
 
-  <footer>
-    <p id="footerText">© 2026 سنتر VIP Royal التعليمي</p>
+    <!-- الحقوق السفلية -->
+    <div class="footer-bottom">
+      <p id="footerText">© 2026 جميع الحقوق محفوظة لـ سنتر VIP Royal التعليمي</p>
+    </div>
   </footer>
 
   <a href="https://wa.me/201559770509" class="whatsapp-icon" target="_blank">
