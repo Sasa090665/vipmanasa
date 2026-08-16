@@ -1,3 +1,11 @@
+// تهيئة Supabase
+const { createClient } = supabase;
+const supabaseClient = createClient(
+  "https://jdtsssxnbnygodvakeem.supabase.co",
+  "sb_publishable_Aio2byia1JGLAPGqSlqmYg_NaZI40I1"
+);
+
+// 1. حدث إرسال نموذج التسجيل الرئيسي
 document.getElementById("signupForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -30,7 +38,7 @@ document.getElementById("signupForm").addEventListener("submit", async function 
     }
   });
 
-  // ✅ تحقق من البيانات الأساسية
+  // ✅ التحقق من صحة المدخلات
   if (fullname.split(/\s+/).length < 3) {
     nameError.textContent = "الاسم لازم يكون ٣ كلمات على الأقل";
     nameError.style.display = "block";
@@ -83,46 +91,98 @@ document.getElementById("signupForm").addEventListener("submit", async function 
     valid = false;
   }
 
-  // تهيئة Supabase
-  const { createClient } = supabase;
-  const supabaseClient = createClient(
-    "https://jdtsssxnbnygodvakeem.supabase.co",
-    "sb_publishable_Aio2byia1JGLAPGqSlqmYg_NaZI40I1"
-  );
-
   if (valid) {
-    const { error } = await supabaseClient.from("student").insert([
-      {
-        student_name: fullname,
-        email,
-        national_id: nationalId,
-        phone: studentPhone,
-        parent_phone: parentPhone,
-        governorate,
-        password
-      }
-    ]);
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "جاري إرسال الكود...";
+
+    // إرسال رمز OTP لإيميل الطالب
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email, 
+      password: password
+    });
 
     if (error) {
-      // ✅ التعامل مع أخطاء UNIQUE
-      if (error.message.includes("unique_email")) {
-        emailError.textContent = "البريد الإلكتروني متسجل قبل كده";
-        emailError.style.display = "block";
-      } else if (error.message.includes("unique_national")) {
-        nationalIdError.textContent = "الرقم القومي متسجل قبل كده";
-        nationalIdError.style.display = "block";
-      } else if (error.message.includes("unique_phone")) {
-        studentPhoneError.textContent = "رقم الطالب متسجل قبل كده";
-        studentPhoneError.style.display = "block";
-      } else if (error.message.includes("unique_parent")) {
-        parentPhoneError.textContent = "رقم ولي الأمر متسجل قبل كده";
-        parentPhoneError.style.display = "block";
+      alert("❌ حدث خطأ أثناء إرسال كود التحقق: " + error.message);
+      submitBtn.disabled = false;
+      submitBtn.textContent = "تسجيل";
+      return;
+    }
+
+    // إخفاء زر التسجيل وإظهار واجهة إدخال كود الـ OTP
+    submitBtn.style.display = "none";
+    document.getElementById("otpSection").style.display = "block";
+
+    // حفظ بيانات الطالب مؤقتاً لحين تأكيد الكود
+    localStorage.setItem("tempStudentData", JSON.stringify({
+      student_name: fullname,
+      email: email,
+      national_id: nationalId,
+      phone: studentPhone,
+      parent_phone: parentPhone,
+      governorate: governorate,
+      password: password
+    }));
+
+    alert("📩 تم إرسال كود التحقق إلى بريدك الإلكتروني، يرجى مراجعته لإتمام التسجيل.");
+  }
+});
+
+// 2. حدث الضغط على زر تأكيد كود OTP
+document.getElementById("verifyBtn").addEventListener("click", async function () {
+  const otpCode = document.getElementById("otpCode").value.trim();
+  const otpError = document.getElementById("otpError");
+  const verifyBtn = document.getElementById("verifyBtn");
+  const emailForVerify = document.getElementById("email").value.trim();
+
+  otpError.style.display = "none";
+  otpError.textContent = "";
+
+  // ✅ تم التعديل هنا ليطلب 8 أرقام
+  if (otpCode.length !== 8 || isNaN(otpCode)) {
+    otpError.textContent = "يرجى كتابة كود تحقق مكون من 8 أرقام";
+    otpError.style.display = "block";
+    return;
+  }
+
+  verifyBtn.disabled = true;
+  verifyBtn.textContent = "جاري التحقق...";
+
+  // التحقق من صحة الكود عبر Supabase Auth باستخدام الإيميل
+  const { data, error } = await supabaseClient.auth.verifyOtp({
+    email: emailForVerify,
+    token: otpCode,
+    type: 'signup'
+  });
+
+  if (error) {
+    otpError.textContent = "كود التحقق غير صحيح أو انتهت صلاحيته";
+    otpError.style.display = "block";
+    verifyBtn.disabled = false;
+    verifyBtn.textContent = "تأكيد الكود وإتمام التسجيل";
+  } else {
+    // تم التأكيد بنجاح -> حفظ البيانات الكاملة في جدول student
+    const studentData = JSON.parse(localStorage.getItem("tempStudentData"));
+
+    const { error: dbError } = await supabaseClient.from("student").insert([studentData]);
+
+    if (dbError) {
+      if (dbError.message.includes("unique_email")) {
+        alert("❌ البريد الإلكتروني مسجل بالفعل.");
+      } else if (dbError.message.includes("unique_national")) {
+        alert("❌ الرقم القومي مسجل بالفعل.");
+      } else if (dbError.message.includes("unique_phone")) {
+        alert("❌ رقم الطالب مسجل بالفعل.");
       } else {
-        alert("❌ حصل خطأ أثناء التسجيل: " + error.message);
+        alert("❌ حصل خطأ أثناء حفظ البيانات: " + dbError.message);
       }
+      verifyBtn.disabled = false;
+      verifyBtn.textContent = "تأكيد الكود وإتمام التسجيل";
     } else {
-      alert("✅ تم التسجيل بنجاح");
-      window.location.href = "login.html";
+      localStorage.removeItem("tempStudentData");
+      alert("✅ تم تأكيد الحساب وإنشاؤه بنجاح!");
+      // توجيه المستخدم لصفحة تسجيل الدخول
+      window.location.href = "login.html"; 
     }
   }
 });
