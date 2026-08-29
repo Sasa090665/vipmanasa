@@ -21,6 +21,15 @@
       </div>
       
       <div class="header-actions">
+        <!-- إضافة مربع وأيقونة البحث هنا -->
+        <div class="search-container">
+          <button class="search-icon-btn" id="searchToggleBtn"><i class="fas fa-search"></i></button>
+          <div class="search-dropdown" id="searchDropdown">
+            <input type="text" id="searchInput" placeholder="ابحث عن مدرس...">
+            <ul class="search-results" id="searchResults"></ul>
+          </div>
+        </div>
+
         <div class="auth-buttons">
           <button class="login-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> تسجيل دخول</button>
           <button class="signup-btn" id="signupBtn"><i class="fas fa-user-plus"></i> إنشاء حساب</button>
@@ -138,7 +147,6 @@
           </a>
         </div>
 
-        <!-- المدرس الجديد -->
         <div class="slide">
           <a href="shahawy.html">
             <img src="shahawy.jpg" alt="أستاذ الشهاوي">

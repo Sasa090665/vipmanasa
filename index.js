@@ -15,7 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutText: "سنتر VIP Royal يقدم أفضل الكورسات التعليمية في مختلف المجالات مع نخبة من المدرسين.",
       coursesTitle: "الكورسات المتاحة",
       address: "📍 زهراء اكتوبر - حي الفيروز - رويال مول - الدور 3",
-      footerText: "© 2026 جميع الحقوق محفوظة لـ سنتر VIP Royal التعليمي"
+      footerText: "© 2026 جميع الحقوق محفوظة لـ سنتر VIP Royal التعليمي",
+      searchPlaceholder: "ابحث عن مدرس...",
+      noResults: "لا يوجد نتائج"
     },
     en: {
       title: "VIP Royal Educational Center",
@@ -30,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutText: "VIP Royal offers the best courses in various fields with top teachers.",
       coursesTitle: "Available Courses",
       address: "📍 Zahraa October - Al Fayrouz - Royal Mall - Floor 3",
-      footerText: "© 2026 All Rights Reserved - VIP Royal Center"
+      footerText: "© 2026 All Rights Reserved - VIP Royal Center",
+      searchPlaceholder: "Search for a teacher...",
+      noResults: "No results found"
     }
   };
 
@@ -61,6 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (document.getElementById('coursesTitle')) document.getElementById('coursesTitle').textContent = t.coursesTitle;
       if (document.getElementById('address')) document.getElementById('address').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${t.address}`;
       if (document.getElementById('footerText')) document.getElementById('footerText').textContent = t.footerText;
+      
+      // تغيير بليس هولدر البحث
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) searchInput.placeholder = t.searchPlaceholder;
 
       const navProfile = document.getElementById('navProfile');
       if (navProfile) {
@@ -91,6 +99,77 @@ document.addEventListener("DOMContentLoaded", () => {
       
       navLinks.appendChild(profileLink);
     }
+  }
+
+  // === 🔍 ميزة البحث عن المدرسين ===
+  const teachersList = [
+    { name: "محمد عبد الله (القائد)", url: "kad.html" },
+    { name: "سليمان العمري (السلطان)", url: "soliman.html" },
+    { name: "محمد مجدي", url: "magdy.html" },
+    { name: "محمد الكوري (الفيلسوف)", url: "elkory.html" },
+    { name: "إسلام سعيد", url: "islam.html" },
+    { name: "محمد منصور", url: "mansour.html" },
+    { name: "البنا", url: "elbana.html" },
+    { name: "اسلام الجنايني", url: "genena.html" },
+    { name: "أستاذ سعيد", url: "said.html" },
+    { name: "أستاذ سراج", url: "sarg.html" },
+    { name: "أستاذ شعبان", url: "sha3ban.html" },
+    { name: "طارق الزيدي", url: "tarek.html" },
+    { name: "أستاذ الشهاوي", url: "shahawy.html" }
+  ];
+
+  const searchToggleBtn = document.getElementById('searchToggleBtn');
+  const searchDropdown = document.getElementById('searchDropdown');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+
+  if(searchToggleBtn && searchDropdown && searchInput) {
+    // فتح وإغلاق مربع البحث
+    searchToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      searchDropdown.classList.toggle('active');
+      if(searchDropdown.classList.contains('active')) {
+        searchInput.focus();
+      }
+    });
+
+    // إغلاق المربع عند الضغط خارجه
+    document.addEventListener('click', (e) => {
+      if(!e.target.closest('.search-container')) {
+        searchDropdown.classList.remove('active');
+      }
+    });
+
+    // منطق البحث عند الكتابة
+    searchInput.addEventListener('input', () => {
+      const val = searchInput.value.trim().toLowerCase();
+      searchResults.innerHTML = '';
+      
+      if (val === '') return;
+
+      const filtered = teachersList.filter(t => t.name.toLowerCase().includes(val));
+      
+      if(filtered.length === 0) {
+        const noResultMsg = currentLang === 'ar' ? translations.ar.noResults : translations.en.noResults;
+        searchResults.innerHTML = `<li class="no-result">${noResultMsg}</li>`;
+        return;
+      }
+
+      filtered.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t.name;
+        li.addEventListener('click', () => {
+          if (!isLoggedIn) {
+             showAuthModal();
+             searchDropdown.classList.remove('active');
+             searchInput.value = ''; // تفريغ الحقل
+          } else {
+             window.location.href = t.url;
+          }
+        });
+        searchResults.appendChild(li);
+      });
+    });
   }
 
   // إظهار أيقونة واتساب عند الوصول لآخر الصفحة
@@ -197,9 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === 🔒 منع فتح صفحات المدرسين لغير المسجلين ===
-  const teacherLinks = document.querySelectorAll('.slide a');
-
+  // === 🔒 دالة منع الدخول وإظهار الرسالة (الـ Modal) ===
   function showAuthModal() {
     if (document.getElementById('authModal')) return;
 
@@ -233,6 +310,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // منع فتح صفحات المدرسين من السلايدر لغير المسجلين
+  const teacherLinks = document.querySelectorAll('.slide a');
   teacherLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       if (!isLoggedIn) {
