@@ -21,12 +21,11 @@
         <input type="email" id="email" placeholder="البريد الإلكتروني" required>
         <div class="error" id="emailError"></div>
       </div>
+      
+      <!-- تم حذف حقل الرقم القومي من هنا -->
+      
       <div class="input-group">
-        <input type="text" id="nationalId" placeholder="الرقم القومي" required>
-        <div class="error" id="nationalIdError"></div>
-      </div>
-      <div class="input-group">
-        <input type="number" id="studentPhone" placeholder="رقم الطالب" required>
+        <input type="text" id="studentPhone" placeholder="رقم الطالب" required>
         <div class="error" id="studentPhoneError"></div>
       </div>
       <div class="input-group">
@@ -78,14 +77,19 @@
       <!-- زر التسجيل الأساسي -->
       <button type="submit" id="submitBtn">تسجيل</button>
 
-      <!-- قسم كود التحقق (يظهر بعد إرسال البيانات للإيميل) -->
+      <!-- قسم كود التحقق والعداد -->
       <div id="otpSection" style="display: none; margin-top: 20px;">
         <div class="input-group">
-          <!-- تم التعديل هنا: maxlength="8" -->
-          <input type="text" id="otpCode" placeholder="أدخل كود التحقق المرسل للإيميل" maxlength="8">
+          <input type="text" id="otpCode" placeholder="أدخل كود التحقق (8 أرقام)" maxlength="8">
           <div class="error" id="otpError"></div>
         </div>
         <button type="button" id="verifyBtn">تأكيد الكود وإتمام التسجيل</button>
+
+        <!-- العداد وزر إعادة الإرسال -->
+        <div id="resendContainer" style="margin-top: 15px; text-align: center;">
+          <p id="timerText" style="margin: 0; font-weight: 600;">يمكنك إعادة الإرسال بعد <span id="countdown" style="color: #d9534f;">60</span> ثانية</p>
+          <button type="button" id="resendBtn" style="display: none; background-color: #6c757d; margin-top: 10px;">إعادة إرسال الكود</button>
+        </div>
       </div>
     </form>
     
