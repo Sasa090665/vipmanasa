@@ -49,7 +49,7 @@
 
     .year-select {padding:12px 20px; border-radius:10px; border:none; font-size:16px; background:#34495e; color:#fff; cursor:pointer; margin-top:20px;}
     .video-container {margin-top:30px; font-size:20px; color:#f1c40f; font-weight:bold;}
-    .video-container iframe {width:80%; height:400px; border:none; border-radius:15px; margin-bottom:20px;}
+    .video-container iframe {width:80%; max-width:800px; height:400px; border:none; border-radius:15px; margin-bottom:20px;}
     
     .qr-container {max-width: 500px; margin: 20px auto; background: #34495e; padding: 20px; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.3);}
     #reader {width: 100%; border-radius: 10px; overflow: hidden; border: none !important;}
@@ -70,7 +70,7 @@
   <div class="hero">Arabic Language</div>
 
   <section id="teacher">
-    <img src="sarj.jpg" alt="الأستاذ محمود سرج">
+    <img src="sarg.jpg" alt="الأستاذ محمود سرج">
     <h2>نبذة عن المدرس</h2>
     <p>
       الأستاذ محمود سرج، متخصص في تدريس لغة الضاد بكافة فروعها.  
@@ -126,10 +126,34 @@
     const yearSelect = document.getElementById("yearSelect");
     const videoContainer = document.getElementById("videoContainer");
 
-    yearSelect.addEventListener("change", () => {
-      videoContainer.innerHTML = "لم يتم تحميل فيديو حتى الآن";
+    // جدول الفيديوهات لكل سنة دراسية
+    const videos = {
+      "1 ثانوي": "https://www.youtube.com/embed/eRwf5xRNtxg", // تم إضافة الفيديو هنا
+      "2 ثانوي": "",
+      "3 ثانوي": "",
+      "1 اعدادي": "",
+      "2 اعدادي": "",
+      "3 اعدادي": ""
+    };
+
+    yearSelect.addEventListener("change", (e) => {
+      const selectedYear = e.target.value;
+
+      if (!selectedYear) {
+        videoContainer.innerHTML = "";
+        return;
+      }
+
+      if (videos[selectedYear]) {
+        // عرض الفيديو إذا كان موجوداً في الجدول
+        videoContainer.innerHTML = `<iframe src="${videos[selectedYear]}" allowfullscreen></iframe>`;
+      } else {
+        // رسالة في حال عدم وجود فيديو
+        videoContainer.innerHTML = "<p>لم يتم تحميل فيديو لـ هذه المرحلة حتى الآن</p>";
+      }
     });
 
+    // كود ماسح الـ QR
     function onScanSuccess(decodedText, decodedResult) {
       html5QrcodeScanner.clear();
       alert("تم قراءة الرمز بنجاح! جاري الانتقال لـ: " + decodedText);
@@ -138,7 +162,9 @@
       }
     }
 
-    function onScanFailure(error) {}
+    function onScanFailure(error) {
+      // يمكن تركها فارغة أو إضافة رسالة خطأ صامتة
+    }
 
     let html5QrcodeScanner = new Html5QrcodeScanner(
       "reader",
