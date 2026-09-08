@@ -30,6 +30,41 @@ function startCountdown() {
   }, 1000);
 }
 
+// ----------------------------------------------------
+// فحص شروط كلمة المرور أثناء الكتابة (Real-time)
+// ----------------------------------------------------
+const passwordInput = document.getElementById("password");
+const reqLength = document.getElementById("reqLength");
+const reqUppercase = document.getElementById("reqUppercase");
+const reqNumber = document.getElementById("reqNumber");
+const reqSpecial = document.getElementById("reqSpecial");
+
+passwordInput.addEventListener("input", function () {
+  const val = passwordInput.value;
+
+  const isLengthValid = val.length >= 8;
+  const isUpperValid = /[A-Z]/.test(val);
+  const isNumberValid = /[0-9]/.test(val);
+  const isSpecialValid = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+
+  updateReq(reqLength, isLengthValid);
+  updateReq(reqUppercase, isUpperValid);
+  updateReq(reqNumber, isNumberValid);
+  updateReq(reqSpecial, isSpecialValid);
+});
+
+function updateReq(element, isValid) {
+  const icon = element.querySelector("i");
+  if (isValid) {
+    element.classList.add("valid");
+    icon.className = "fas fa-check-circle";
+  } else {
+    element.classList.remove("valid");
+    icon.className = "fas fa-times-circle";
+  }
+}
+// ----------------------------------------------------
+
 document.getElementById("signupForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -40,7 +75,7 @@ document.getElementById("signupForm").addEventListener("submit", async function 
   const studentPhone = document.getElementById("studentPhone").value.trim();
   const parentPhone = document.getElementById("parentPhone").value.trim();
   const governorate = document.getElementById("governorate").value;
-  const password = document.getElementById("password").value;
+  const password = passwordInput.value;
   const confirmPassword = document.getElementById("confirmPassword").value;
 
   const nameError = document.getElementById("nameError");
@@ -86,8 +121,15 @@ document.getElementById("signupForm").addEventListener("submit", async function 
     valid = false;
   }
 
-  if (password.length < 6) {
-    passwordError.textContent = "كلمة المرور لازم تكون 6 أحرف على الأقل";
+  // التعديل هنا: فحص قوة كلمة المرور عند الضغط على تسجيل
+  const isPasswordStrong = 
+    password.length >= 8 &&
+    /[A-Z]/.test(password) &&
+    /[0-9]/.test(password) &&
+    /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+  if (!isPasswordStrong) {
+    passwordError.textContent = "يرجى استيفاء جميع شروط كلمة المرور الموضحة";
     passwordError.style.display = "block";
     valid = false;
   }
@@ -124,14 +166,13 @@ document.getElementById("signupForm").addEventListener("submit", async function 
     submitBtn.style.display = "none";
     document.getElementById("otpSection").style.display = "block";
 
-    // هنا التعديل: تم إضافة الباسورد للبيانات اللي هتتحفظ
     localStorage.setItem("tempStudentData", JSON.stringify({
       student_name: fullname,
       email: email,
       phone: studentPhone,
       parent_phone: parentPhone,
       governorate: governorate,
-      password: password // <--- الباسورد هينبعت لجدول student
+      password: password 
     }));
 
     alert("📩 تم إرسال كود التحقق إلى بريدك الإلكتروني، يرجى مراجعته لإتمام التسجيل.");

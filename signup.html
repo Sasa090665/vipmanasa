@@ -22,8 +22,6 @@
         <div class="error" id="emailError"></div>
       </div>
       
-      <!-- تم حذف حقل الرقم القومي من هنا -->
-      
       <div class="input-group">
         <input type="text" id="studentPhone" placeholder="رقم الطالب" required>
         <div class="error" id="studentPhoneError"></div>
@@ -65,10 +63,22 @@
         </select>
         <div class="error" id="governorateError"></div>
       </div>
+      
+      <!-- قسم كلمة المرور الجديد -->
       <div class="input-group">
         <input type="password" id="password" placeholder="كلمة المرور" required>
+        
+        <!-- قائمة شروط كلمة المرور -->
+        <div class="password-requirements" id="passwordRequirements">
+          <p class="req-item" id="reqLength"><i class="fas fa-times-circle"></i> 8 أحرف على الأقل</p>
+          <p class="req-item" id="reqUppercase"><i class="fas fa-times-circle"></i> حرف كبير واحد على الأقل (A-Z)</p>
+          <p class="req-item" id="reqNumber"><i class="fas fa-times-circle"></i> رقم واحد على الأقل (0-9)</p>
+          <p class="req-item" id="reqSpecial"><i class="fas fa-times-circle"></i> رمز خاص واحد على الأقل (@, #, $, !)</p>
+        </div>
+
         <div class="error" id="passwordError"></div>
       </div>
+
       <div class="input-group">
         <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
         <div class="error" id="confirmPasswordError"></div>

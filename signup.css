@@ -8,6 +8,7 @@ body {
   margin: 0;
   padding: 20px;
 }
+
 .signup-container {
   background: #fff;
   padding: 40px;
@@ -17,6 +18,7 @@ body {
   max-width: 420px;
   animation: fadeInUp 1s ease forwards;
 }
+
 .signup-container h2 {
   text-align: center;
   margin-bottom: 25px;
@@ -25,10 +27,12 @@ body {
   animation: glow 2s infinite alternate;
   font-size: 1.5rem;
 }
+
 .input-group {
   position: relative;
   margin-bottom: 18px;
 }
+
 .input-group input, .input-group select {
   width: 100%;
   padding: 14px 15px;
@@ -38,12 +42,14 @@ body {
   transition: 0.3s;
   box-sizing: border-box;
 }
+
 .input-group input:focus, .input-group select:focus {
   border-color: #3498db;
   box-shadow: 0 0 10px rgba(52,152,219,0.4);
   outline: none;
   transform: scale(1.02);
 }
+
 button {
   width: 100%;
   padding: 15px;
@@ -55,20 +61,24 @@ button {
   cursor: pointer;
   transition: 0.3s;
 }
+
 button:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
+
 p {
   text-align: center;
   margin-top: 15px;
   font-size: 0.9rem;
 }
+
 p a {
   color: #3498db;
   text-decoration: none;
   font-weight: bold;
 }
+
 p a:hover {
   text-decoration: underline;
 }
@@ -86,19 +96,55 @@ p a:hover {
   animation: fadeIn 0.3s ease-in-out;
   position: relative;
 }
+
 .error::before {
   content: "⚠️ ";
   margin-right: 5px;
 }
 
+/* -------------------------------------------
+   تنسيقات قائمة شروط كلمة المرور (الجديدة)
+--------------------------------------------- */
+.password-requirements {
+  margin-top: 10px;
+  background: #f8f9fa;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+}
+
+.req-item {
+  margin: 6px 0;
+  color: #e74c3c; /* لون أحمر للشروط غير المحققة */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.req-item i {
+  font-size: 0.95rem;
+}
+
+/* التنسيق عند تحقيق الشرط */
+.req-item.valid {
+  color: #2ecc71; /* لون أخضر للشرط المحقق */
+}
+
+/* -------------------------------------------
+   الأنيميشن (الحركات)
+--------------------------------------------- */
 @keyframes fadeInUp {
   from {opacity:0; transform: translateY(40px);}
   to {opacity:1; transform: translateY(0);}
 }
+
 @keyframes glow {
   from {color:#2c3e50;}
   to {color:#3498db;}
 }
+
 @keyframes fadeIn {
   from {opacity: 0; transform: translateY(-5px);}
   to {opacity: 1; transform: translateY(0);}
