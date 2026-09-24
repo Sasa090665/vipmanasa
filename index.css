@@ -11,16 +11,16 @@
 }
 
 body {
-  font-family: Tahoma, sans-serif;
+  font-family: Tahoma, Arial, sans-serif;
   margin: 0;
   padding: 0;
   background: var(--primary-bg);
   color: var(--text-dark);
   animation: fadeIn 1.2s ease-in-out;
-  direction: rtl;
+  direction: inherit;
 }
 
-/* === 🌟 الجزء العلوي: الهيدر واللوجو === */
+/* === 🌟 الهيدر واللوجو الخلفي === */
 .hero-wrapper {
   position: relative;
   min-height: 100vh;
@@ -69,14 +69,13 @@ header p {
   color: #e5e7eb;
 }
 
-/* === 🎨 أزرار التحكم ومربع البحث === */
+/* === 🎨 البحث والتحكم === */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* 🔍 تصميم مربع البحث */
 .search-container {
   position: relative;
 }
@@ -110,13 +109,13 @@ header p {
   transform: translateX(-50%) translateY(10px);
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   width: 260px;
   padding: 15px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  z-index: 100;
+  z-index: 1000;
   border: 1px solid var(--border-gold);
 }
 
@@ -132,7 +131,7 @@ header p {
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
-  font-family: Tahoma, sans-serif;
+  font-family: inherit;
   font-size: 14px;
   box-sizing: border-box;
   transition: border-color 0.3s;
@@ -177,13 +176,6 @@ header p {
   text-align: center;
 }
 
-.search-results li.no-result:hover {
-  background: transparent;
-  color: var(--text-muted);
-  font-weight: normal;
-}
-
-/* تخصيص السكرول لمربع البحث */
 .search-results::-webkit-scrollbar {
   width: 6px;
 }
@@ -192,7 +184,7 @@ header p {
   border-radius: 10px;
 }
 
-/* أزرار التسجيل واللغة */
+/* === 🔘 أزرار التسجيل واللغة === */
 .auth-buttons {
   display: flex;
   gap: 12px;
@@ -297,9 +289,9 @@ nav {
   cursor: pointer;
 }
 
-/* === 📚 الكورسات والبطاقات === */
+/* === 📚 الكورسات === */
 section {
-  padding: 40px;
+  padding: 40px 20px;
   text-align: center;
 }
 
@@ -313,14 +305,14 @@ section h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .course {
   background: var(--card-bg);
   border: 1px solid var(--border-gold);
   padding: 25px;
-  margin: 15px;
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.4s ease;
@@ -329,8 +321,6 @@ section h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  overflow: hidden;
 }
 
 .course i {
@@ -356,17 +346,6 @@ section h2 {
   box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
   background: #ffffff;
 }
-
-.course:nth-child(1){animation-delay:0.2s;}
-.course:nth-child(2){animation-delay:0.4s;}
-.course:nth-child(3){animation-delay:0.6s;}
-.course:nth-child(4){animation-delay:0.8s;}
-.course:nth-child(5){animation-delay:1s;}
-.course:nth-child(6){animation-delay:1.2s;}
-.course:nth-child(7){animation-delay:1.4s;}
-.course:nth-child(8){animation-delay:1.6s;}
-.course:nth-child(9){animation-delay:1.8s;}
-.course:nth-child(10){animation-delay:2s;}
 
 /* === 🖼️ السلايدر والمدرسين === */
 .slider {
@@ -409,6 +388,7 @@ section h2 {
   padding: 10px 20px;
   border-radius: 30px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .prev, .next {
@@ -421,22 +401,25 @@ section h2 {
   padding: 12px;
   cursor: pointer;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 18px;
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .prev { left: 15px; }
 .next { right: 15px; }
+
 .prev:hover, .next:hover {
   background: var(--gold-main);
   color: #0b1a30;
 }
 
 .modares-image img {
+  max-width: 600px;
   width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   border-radius: 15px;
   object-fit: cover;
 }
@@ -455,7 +438,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  text-align: right;
+  text-align: start;
 }
 
 .footer-box h3 {
@@ -480,6 +463,11 @@ footer {
   width: 40px;
   height: 2px;
   background: var(--gold-main);
+}
+
+[dir="ltr"] .footer-box h4::after {
+  right: auto;
+  left: 0;
 }
 
 .footer-box p {
@@ -559,8 +547,9 @@ footer {
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
   opacity: 0;
   pointer-events: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   z-index: 1000;
+  text-decoration: none;
 }
 
 .whatsapp-icon.show {
@@ -584,7 +573,6 @@ footer {
     margin-top: 10px;
   }
   
-  /* تظبيط مربع البحث على الموبايل */
   .search-dropdown {
     width: 90vw;
     max-width: 320px;
@@ -605,18 +593,19 @@ footer {
     flex-direction: column;
     background: var(--primary-navy);
     position: absolute;
-    top: 50px;
+    top: 100%;
     left: 0;
     width: 100%;
     padding: 15px 0;
     border-bottom: 3px solid var(--gold-main);
+    z-index: 99;
   }
   .nav-links.show {
     display: flex;
-    animation: slideDown 0.5s ease forwards;
+    animation: slideDown 0.4s ease forwards;
   }
   .nav-links.hide {
-    animation: slideUp 0.5s ease forwards;
+    animation: slideUp 0.4s ease forwards;
   }
   .menu-icon {
     display: block;
@@ -625,17 +614,11 @@ footer {
     font-size: 22px;
   }
   header p {
-    font-size: 16px;
-  }
-  .course {
-    max-width: 100%;
+    font-size: 15px;
   }
   .caption {
     font-size: 14px;
     padding: 6px 12px;
-  }
-  .modares-image img, .slide img {
-    max-width: 100%;
   }
   .footer-container {
     text-align: center;
@@ -644,23 +627,13 @@ footer {
     right: 50%;
     transform: translateX(50%);
   }
+  [dir="ltr"] .footer-box h4::after {
+    left: 50%;
+    right: auto;
+  }
   .footer-box p, .footer-social-icons {
     justify-content: center;
   }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .slider { max-width: 90%; }
-  .caption { font-size: 16px; }
-  .modares-image img { max-width: 80%; }
-  .slide img { max-width: 90%; }
-}
-
-@media (min-width: 1025px) {
-  .slider { max-width: 800px; }
-  .caption { font-size: 18px; }
-  .modares-image img { max-width: 600px; }
-  .slide img { max-width: 800px; }
 }
 
 /* === ✨ الانيميشن === */
@@ -689,16 +662,7 @@ footer {
   to { opacity: 0; transform: translateY(-20px); }
 }
 
-.error {
-  color: #dc2626;
-  font-size: 13px;
-  margin-top: 5px;
-  display: block;
-  text-align: right;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Modal Styling */
+/* === Modal Styling === */
 .custom-modal-overlay {
   position: fixed;
   top: 0;
@@ -792,4 +756,288 @@ footer {
   background: transparent;
   color: var(--primary-navy);
   border: 1px solid var(--primary-navy);
+}
+/* ==================================================
+   منظم المذاكرة (To-Do List) - تصميم الفقاعة
+================================================== */
+
+/* 1. الزرار الدائري العائم في أسفل الصفحة */
+#todoFloatBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px; /* لو عايز الزرار يمين خليها right بدل left */
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #0f172a, #3b82f6);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 9999;
+  border: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#todoFloatBtn:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+/* 2. الخلفية الشفافة للنافذة المنبثقة */
+#todoModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px); /* تأثير ضبابي خفيف للخلفية */
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#todoModal.active {
+  display: flex;
+  animation: fadeInBackground 0.3s ease;
+}
+
+/* 3. شكل الفقاعة (Bubble) اللي بتفتح بعرض الصفحة */
+.todo-content {
+  background: #ffffff;
+  width: 95%; /* عرض الصفحة تقريباً */
+  max-width: 1200px;
+  height: 85vh; /* ارتفاع الصفحة تقريباً */
+  border-radius: 50px; /* شكل الفقاعة بحواف دائرية جداً */
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: popBubble 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-sizing: border-box;
+}
+
+/* زر إغلاق الفقاعة */
+#closeTodoModal {
+  position: absolute;
+  top: 30px;
+  right: 30px; /* لو الموقع إنجليزي أو عايز تعكسه خليها left */
+  background: #f1f5f9;
+  color: #64748b;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#closeTodoModal:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+/* 4. تنسيق محتوى منظم المذاكرة الداخلي */
+.todo-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.todo-header h2 {
+  font-size: 32px;
+  color: #0f172a;
+}
+
+/* شريط التقدم (Progress Bar) */
+.todo-progress-container {
+  margin-bottom: 25px;
+}
+
+#todoProgressText {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  color: #475569;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.todo-progress-bar {
+  width: 100%;
+  height: 12px;
+  background-color: #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#todoProgressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  width: 0%;
+  border-radius: 20px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* منطقة إدخال المهام */
+.todo-input-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+#todoInput {
+  flex: 1;
+  padding: 18px 25px;
+  border: 2px solid #e2e8f0;
+  border-radius: 30px; /* حواف دائرية تليق مع الفقاعة */
+  font-size: 18px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+#todoInput:focus {
+  border-color: #3b82f6;
+}
+
+#addTodoBtn {
+  padding: 0 35px;
+  background-color: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#addTodoBtn:hover {
+  background-color: #1e293b;
+  transform: scale(1.05);
+}
+
+/* قائمة المهام (Scrollable) */
+#todoList {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  list-style: none;
+  margin: 0;
+}
+
+/* شريط التمرير (Scrollbar) للقائمة */
+#todoList::-webkit-scrollbar {
+  width: 8px;
+}
+#todoList::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* عنصر المهمة الواحدة */
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  background: #f8fafc;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.todo-item:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.todo-item-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.todo-item-left i {
+  font-size: 24px;
+  color: #94a3b8;
+  transition: color 0.3s;
+}
+
+.todo-item.completed {
+  background: #f1f5f9;
+  opacity: 0.8;
+}
+
+.todo-item.completed .todo-item-left span {
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.todo-item.completed .todo-item-left i {
+  color: #10b981; /* لون أخضر للمهمة المكتملة */
+}
+
+.delete-task-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.delete-task-btn:hover {
+  background: #fee2e2;
+  transform: scale(1.1);
+}
+
+.empty-todo {
+  text-align: center;
+  color: #94a3b8;
+  padding: 40px;
+  font-size: 18px;
+}
+
+/* 5. تأثيرات الرسوم المتحركة (Animations) */
+@keyframes fadeInBackground {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popBubble {
+  0% { transform: scale(0.8) translateY(100px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* تجاوب الفقاعة مع الشاشات الصغيرة (الموبايل) */
+@media (max-width: 768px) {
+  .todo-content {
+    width: 100%;
+    height: 95vh;
+    border-radius: 30px;
+    padding: 25px;
+  }
+  
+  .todo-input-group {
+    flex-direction: column;
+  }
+  
+  #addTodoBtn {
+    padding: 15px;
+  }
 }

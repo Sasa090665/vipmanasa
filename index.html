@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- الحاوية الكبيرة التي تجمع الهيدر واللوجو الخلفي ليمتد بطول الشاشة -->
+  <!-- الحاوية الكبيرة التي تجمع الهيدر واللوجو الخلفي -->
   <div class="hero-wrapper">
     <div class="hero-overlay"></div>
 
@@ -21,9 +21,9 @@
       </div>
       
       <div class="header-actions">
-        <!-- إضافة مربع وأيقونة البحث هنا -->
+        <!-- مربع وأيقونة البحث -->
         <div class="search-container">
-          <button class="search-icon-btn" id="searchToggleBtn"><i class="fas fa-search"></i></button>
+          <button class="search-icon-btn" id="searchToggleBtn" aria-label="بحث"><i class="fas fa-search"></i></button>
           <div class="search-dropdown" id="searchDropdown">
             <input type="text" id="searchInput" placeholder="ابحث عن مدرس...">
             <ul class="search-results" id="searchResults"></ul>
@@ -46,7 +46,7 @@
         <a href="#about" id="navAbout">من نحن</a>
         <a href="#courses" id="navCourses">الكورسات</a>
         <a href="#contact" id="navContact">تواصل معنا</a>
-        <a href="travel.html">الرحلات و الترفيه</a>
+        <a href="travel.html" id="navTravel">الرحلات و الترفيه</a>
       </div>
     </nav>
   </div>
@@ -55,11 +55,12 @@
     <h2 id="aboutTitle">من نحن</h2>
     <p id="aboutText">سنتر VIP Royal يقدم أفضل الكورسات التعليمية في مختلف المجالات مع نخبة من المدرسين.</p>
 
-    <!-- صورة المدرس -->
+    <!-- صورة المدرس الرئيسية -->
     <div class="modares-image">
       <img src="modares.jpeg" alt="المدرس">
     </div>
 
+    <!-- سلايدر المدرسين -->
     <div class="slider">
       <div class="slides">
 
@@ -155,8 +156,8 @@
         </div>
 
       </div>
-      <button class="prev"><i class="fas fa-chevron-left"></i></button>
-      <button class="next"><i class="fas fa-chevron-right"></i></button>
+      <button class="prev" aria-label="السابق"><i class="fas fa-chevron-left"></i></button>
+      <button class="next" aria-label="التالي"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
 
@@ -169,24 +170,22 @@
       <div class="course"><i class="fas fa-landmark"></i><h3 id="course4">تاريخ</h3><p id="course4Text">دراسة الأحداث التاريخية.</p></div>
       <div class="course"><i class="fas fa-globe"></i><h3 id="course5">جغرافيا</h3><p id="course5Text">دراسة الأرض والخرائط.</p></div>
       <div class="course"><i class="fas fa-brain"></i><h3 id="course6">فلسفة</h3><p id="course6Text">التفكير النقدي والمنطقي.</p></div>
-      <div class="course"><i class="fas fa-calculator"></i><h3 id="course7">رياضيات</h3><p id="course7Text">شرح المعادلات و النظريات </p></div>
+      <div class="course"><i class="fas fa-calculator"></i><h3 id="course7">رياضيات</h3><p id="course7Text">شرح المعادلات والنظريات.</p></div>
       <div class="course"><i class="fas fa-atom"></i><h3 id="course8">علوم متكاملة</h3><p id="course8Text">دمج العلوم المختلفة.</p></div>
       <div class="course"><i class="fas fa-bolt"></i><h3 id="course9">فيزياء</h3><p id="course9Text">قوانين الطبيعة والطاقة.</p></div>
       <div class="course"><i class="fas fa-code"></i><h3 id="course10">برمجة</h3><p id="course10Text">تعلم أساسيات البرمجة.</p></div>
     </div>
   </section>
 
-  <!-- الفوتر المدمج به التواصل والروابط -->
+  <!-- الفوتر -->
   <footer id="contact">
     <div class="footer-container">
       
-      <!-- العمود الأول: اسم السنتر والوصف -->
       <div class="footer-box">
         <h3>VIP Royal</h3>
         <p>منصة وسنتر VIP Royal التعليمي - طريقك للقمة مع أفضل نخبة من المدرسين.</p>
       </div>
 
-      <!-- العمود الثاني: تفاصيل التواصل -->
       <div class="footer-box">
         <h4>تواصل معنا</h4>
         <p id="phone"><i class="fas fa-phone-alt"></i> <a href="tel:01094978153"></a></p>
@@ -194,7 +193,6 @@
         <p id="address"><i class="fas fa-map-marker-alt"></i> زهراء اكتوبر - حي الفيروز - رويال مول - الدور 3</p>
       </div>
 
-      <!-- العمود الثالث: شبكات التواصل الاجتماعي -->
       <div class="footer-box">
         <h4>تابعنا على</h4>
         <div class="footer-social-icons">
@@ -208,15 +206,47 @@
 
     </div>
 
-    <!-- الحقوق السفلية -->
     <div class="footer-bottom">
       <p id="footerText">© 2026 جميع الحقوق محفوظة لـ سنتر VIP Royal التعليمي</p>
     </div>
   </footer>
 
-  <a href="https://wa.me/201213266416" class="whatsapp-icon" target="_blank">
+  <!-- زر واتساب -->
+  <a href="https://wa.me/201213266416" class="whatsapp-icon" target="_blank" aria-label="واتساب">
     <i class="fab fa-whatsapp"></i>
   </a>
+
+  <!-- زر منظم المذاكرة العائم -->
+  <button class="todo-float-btn" id="todoFloatBtn" title="منظم المذاكرة">
+    <i class="fas fa-list-check"></i>
+  </button>
+
+  <!-- نافذة قائمة تنظيم المذاكرة (To-Do List Modal) -->
+  <div id="todoModal" class="todo-modal-overlay">
+    <div class="todo-modal-content">
+      <div class="todo-header">
+        <h3><i class="fas fa-clipboard-list"></i> منظم المذاكرة اليومي</h3>
+        <span class="close-todo-modal" id="closeTodoModal">&times;</span>
+      </div>
+      <div class="todo-body">
+        <div class="todo-input-group">
+          <input type="text" id="todoInput" placeholder="أضف درس أو مهمة لمذاكرتها...">
+          <button id="addTodoBtn"><i class="fas fa-plus"></i> إضافة</button>
+        </div>
+
+        <!-- شريط نسبة الإنجاز -->
+        <div class="todo-stats">
+          <span id="todoProgressText">تم إنجاز 0 من 0 مهام</span>
+          <div class="todo-progress-bar">
+            <div id="todoProgressBarFill" class="todo-progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- قائمة المهام -->
+        <ul id="todoList" class="todo-list"></ul>
+      </div>
+    </div>
+  </div>
 
   <script src="index.js"></script>
 </body>
